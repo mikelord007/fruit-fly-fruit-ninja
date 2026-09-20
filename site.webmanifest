@@ -1,0 +1,16 @@
+{
+  "id": "/",
+  "name": "Fruit Fly Fruit Ninja",
+  "short_name": "Fly Fruit Ninja",
+  "description": "The tiniest salad bar. Train your fly crew and slice fruit salads in 3D.",
+  "lang": "en",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#f9f6ed",
+  "theme_color": "#245443",
+  "icons": [
+    {"src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"}
+  ]
+}

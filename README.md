@@ -1,8 +1,12 @@
 # Fruit Fly Fruit Ninja — the tiniest salad bar
 
+<img src="assets/logo-128.png" width="96" height="96" alt="A tiny fly slicing an orange">
+
 A playable Three.js kitchen: flies rest on shelves, jars and counter edges, then fly through the room to carry a shared knife. Choose a salad, recruit its learned fruit fans and time the chop. Inspect any chef's live neural activity in the rotatable Brain panel.
 
 **Play online: https://fruit-fly-fruit-ninja.vercel.app**
+
+Brand assets, image-generation prompts, and search/social metadata notes: [BRAND.md](BRAND.md).
 
 ## Play
 

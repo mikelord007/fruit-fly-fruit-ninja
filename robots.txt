@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fruit-fly-fruit-ninja.vercel.app/sitemap.xml
