@@ -8,6 +8,12 @@ A playable Three.js kitchen: flies rest on shelves, jars and counter edges, then
 
 Brand assets, image-generation prompts, and search/social metadata notes: [BRAND.md](BRAND.md).
 
+## Flight modes
+
+The kitchen now includes **Autopilot**, **Learned action readout**, and **Untrained** under **Who is steering?** Switch them live, or use **Train & inspect flight → Restart round** for a fresh comparison. A pretrained 3D lesson ships with the game. **Erase flight learning** removes its motor outputs; **Train flight readout** learns them again in the browser, and **Restore trained flight** reloads the starter lesson. These controls preserve learned fruit tastes.
+
+Choose **Flight circuit** in the Brain panel to inspect the motor features and applied force; **Taste circuit** shows smell learning. Learning steers the attached knife's XYZ forces and rotation. Perch-to-knife routes remain staged 3D paths. See [GAME_MODEL.md](GAME_MODEL.md) for the distinction and measured results.
+
 ## Play
 
 Requires Node.js 22+ and a WebGL-capable browser. No package install, API key or internet connection is needed. Double-click `launch.cmd`, or:

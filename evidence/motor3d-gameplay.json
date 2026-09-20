@@ -1,0 +1,361 @@
+{
+  "description": "Learned XYZ controller in full gameplay; scripted perfect timing. Recipe preference training is independent.",
+  "recipes": [
+    {
+      "name": "Sunshine bowl",
+      "phase": "served",
+      "served": 1,
+      "cuts": 3,
+      "time": 30.799999999998892,
+      "maxGripError": 0
+    },
+    {
+      "name": "Berry besties",
+      "phase": "served",
+      "served": 1,
+      "cuts": 3,
+      "time": 30.891666666665554,
+      "maxGripError": 0
+    },
+    {
+      "name": "Green surprise",
+      "phase": "served",
+      "served": 1,
+      "cuts": 3,
+      "time": 29.549999999998963,
+      "maxGripError": 0
+    }
+  ],
+  "pairs": [
+    {
+      "crew": [
+        0,
+        1
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.016666666666739,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        0,
+        2
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 9.041666666666794,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        0,
+        3
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 9.200000000000118,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        0,
+        4
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.150000000000064,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        0,
+        5
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.450000000000047,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        0,
+        6
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.000000000000073,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        0,
+        7
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.058333333333403,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        1,
+        2
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.358333333333386,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        1,
+        3
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.358333333333386,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        1,
+        4
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.358333333333386,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        1,
+        5
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.450000000000047,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        1,
+        6
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.358333333333386,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        1,
+        7
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.358333333333386,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        2,
+        3
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 9.200000000000118,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        2,
+        4
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.150000000000064,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        2,
+        5
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.450000000000047,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        2,
+        6
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.000000000000073,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        2,
+        7
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.058333333333403,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        3,
+        4
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.150000000000064,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        3,
+        5
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.450000000000047,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        3,
+        6
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.000000000000073,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        3,
+        7
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.058333333333403,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        4,
+        5
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.450000000000047,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        4,
+        6
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.450000000000047,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        4,
+        7
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.450000000000047,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        5,
+        6
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.450000000000047,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        5,
+        7
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.450000000000047,
+      "maxGripError": 0
+    },
+    {
+      "crew": [
+        6,
+        7
+      ],
+      "phase": "served",
+      "served": 1,
+      "cuts": 1,
+      "time": 10.450000000000047,
+      "maxGripError": 0
+    }
+  ],
+  "controls": {
+    "untrained": {
+      "phase": "lift",
+      "served": 0,
+      "cuts": 0,
+      "time": 10.000000000000073,
+      "maxGripError": 0
+    },
+    "resetReadout": {
+      "phase": "lift",
+      "served": 0,
+      "cuts": 0,
+      "time": 10.000000000000073,
+      "maxGripError": 0
+    }
+  },
+  "summary": {
+    "recipesPassed": 3,
+    "pairsPassed": 28,
+    "maxGripError": 0,
+    "zeroControlsBlock": true
+  }
+}

@@ -1,14 +1,23 @@
 import {DT} from './physics.js';
 import {KNIFE_HOME,createFlightWorld,dispatchCrew,stepFlyMotion,stepKnife,knifeSettled,crewAttached,poseQuaternion,transformPoint} from './flight3d.js';
 import {recruit,FRUITS,stepNeuralActivity} from './fruit-memory.js';
+import {motorActions} from './motor3d.js';
+export const MOTOR_MODES=['autopilot','learned','untrained'];
 export const RECIPES = [
   {name:'Sunshine bowl',subtitle:'The crowd pleaser',fruits:[0,1,2]},
   {name:'Berry besties',subtitle:'Double berry, extra happy',fruits:[2,0,2]},
   {name:'Green surprise',subtitle:'Teach your crew a new taste',fruits:[3,1,3]},
 ];
 export const FRUIT_POSITION = {x:0,y:.56,z:0,radius:.43};
-export function createGame(memory) {
-  return {memory,world:createFlightWorld(),phase:'idle',phaseTime:0,time:0,readyTime:0,crew:[],recipe:null,index:0,fruit:null,cutAt:null,cutCount:0,score:0,combo:0,served:0,events:[],rush:false,remaining:90,ended:false,lastQuality:'',pieces:[],orderId:0};
+export function createGame(memory,{motorMode='autopilot',motorSwarm=null}={}) {
+  if(!MOTOR_MODES.includes(motorMode))throw new RangeError('Unknown flight controller');
+  return {memory,motorMode,motorSwarm,world:createFlightWorld(),phase:'idle',phaseTime:0,time:0,readyTime:0,crew:[],recipe:null,index:0,fruit:null,cutAt:null,cutCount:0,score:0,combo:0,served:0,events:[],rush:false,remaining:90,ended:false,lastQuality:'',pieces:[],orderId:0};
+}
+export function setMotorMode(g,mode,swarm=g.motorSwarm) {
+  if(!MOTOR_MODES.includes(mode))throw new RangeError('Unknown flight controller');
+  g.motorMode=mode;g.motorSwarm=swarm;
+  // A previously ready knife must settle under its new controller before chopping.
+  if(g.phase==='ready'){g.readyTime=0;phase(g,'lift');}
 }
 function emit(g,type,detail={}) { g.events.push({type,time:g.time,...detail}); }
 function phase(g,value) {g.phase=value;g.phaseTime=0;}
@@ -55,9 +64,13 @@ export function stepGame(g,dt=DT) {
   if(['idle','served','waiting'].includes(g.phase)) return;
   if(g.phase==='recruit') {if(crewAttached(g.world,g.crew)){g.world.flies.forEach(f=>f.enabled=g.crew.includes(f.index));g.world.target={x:0,y:1.85,z:0,yaw:0};phase(g,'lift');}else return;}
   const before={x:g.world.x,y:g.world.y,z:g.world.z,orientation:g.world.orientation.clone()};
-  stepKnife(g.world,dt);stepFlyMotion(g.world,0);
+  const actions=g.motorMode==='autopilot'?undefined:motorActions(g.motorSwarm,g.world,g.motorMode);
+  stepKnife(g.world,dt,actions);stepFlyMotion(g.world,0);
   if(g.phase==='lift'&&knifeSettled(g.world)) {phase(g,'ready');emit(g,'ready');}
-  else if(g.phase==='ready') g.readyTime+=dt;
+  else if(g.phase==='ready') {
+    if(!knifeSettled(g.world)){g.readyTime=0;phase(g,'lift');}
+    else g.readyTime+=dt;
+  }
   else if(g.phase==='cut') {
     if(g.cutAt===null&&bladeContact(before,g.world,FRUIT_POSITION,dt)) {
       g.cutAt=g.time;g.cutCount++;g.combo++;g.score+=g.pendingPoints+Math.min(5,g.combo-1)*10;

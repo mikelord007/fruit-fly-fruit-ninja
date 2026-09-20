@@ -23,9 +23,8 @@ export function createFlightWorld() {
 
 // A full XYZ rigid body with quaternion orientation. Grip motors supply bounded
 // forces and torques; these are engineered actuators, not insect aerodynamics.
-export function stepKnife(world,dt) {
+export function teacherMotorActions(world,{bounded=true}={}) {
   const active=world.flies.filter(f=>f.enabled);
-  const totalForce=new Vector3(0,-9.81*world.mass,0),totalTorque=new Vector3();
   const desiredForce=new Vector3(
     5.3*(world.target.x-world.x)-3.8*world.vx,
     9.81+6.5*(world.target.y-world.y)-4.2*world.vy,
@@ -35,9 +34,20 @@ export function stepKnife(world,dt) {
   const sign=error.w<0?-1:1;
   const desiredTorque=new Vector3(error.x,error.y,error.z).multiplyScalar(30*sign)
     .addScaledVector(world.angularVelocity,-7).multiplyScalar(world.inertia);
+  return world.flies.map(fly=>{
+    const force=fly.enabled?desiredForce.clone().divideScalar(active.length):new Vector3();
+    const torque=fly.enabled?desiredTorque.clone().divideScalar(active.length):new Vector3();
+    if(bounded){force.clampLength(0,8);torque.clampLength(0,.9);}
+    return {fx:force.x,fy:force.y,fz:force.z,tx:torque.x,ty:torque.y,tz:torque.z};
+  });
+}
+export function stepKnife(world,dt,actions) {
+  const commands=actions??teacherMotorActions(world);
+  const totalForce=new Vector3(0,-9.81*world.mass,0),totalTorque=new Vector3();
   for(const fly of world.flies) {
-    const force=fly.enabled?desiredForce.clone().divideScalar(active.length).clampLength(0,8):new Vector3();
-    const torque=fly.enabled?desiredTorque.clone().divideScalar(active.length).clampLength(0,.9):new Vector3();
+    const a=commands[fly.index]??{},finite=x=>Number.isFinite(x)?x:0;
+    const force=fly.enabled?new Vector3(finite(a.fx),finite(a.fy),finite(a.fz)).clampLength(0,8):new Vector3();
+    const torque=fly.enabled?new Vector3(finite(a.tx),finite(a.ty),finite(a.tz)).clampLength(0,.9):new Vector3();
     fly.fx=force.x;fly.fy=force.y;fly.fz=force.z;fly.torque.copy(torque);
     totalForce.add(force);
     const arm=new Vector3(fly.attachment,0,0).applyQuaternion(world.orientation);

@@ -1,15 +1,17 @@
 import {createMemory,FRUITS,FLY_NAMES,responses,recruit,teach,resetMemory,changedSynapses,VOLUNTEER_THRESHOLD,sniff} from './fruit-memory.js';
-import {createGame,order,stepGame,chop,timing,startRush,refreshCrew,RECIPES} from './salad-game.js';
+import {createGame,order,stepGame,chop,timing,startRush,refreshCrew,RECIPES,setMotorMode} from './salad-game.js';
 import {createSaladView} from './salad-scene.js';
 import {DT} from './physics.js';
 import {PERCHES} from './flight3d.js';
 import {createBrainPanel} from './brain-panel.js';
+import {createMotorUI} from './motor-ui.js';
 import {setupFullscreen} from './fullscreen.js';
 const $=id=>document.getElementById(id);
 setupFullscreen($('kitchen'),$('fullscreen'),$('kitchenMenu'),$('fullscreenStatus'));
 const text=(id,value)=>{if($(id).textContent!==String(value))$(id).textContent=String(value);};
-let memory,game,view,brainPanel,selected=new Set([0,4]),inspect=0,custom=new Set([0,1,2]),sound=false,audioContext=null,paused=false;
+let memory,game,view,brainPanel,motorUI,selected=new Set([0,4]),inspect=0,custom=new Set([0,1,2]),sound=false,audioContext=null,paused=false;
 let accumulator=0,last=performance.now(),uiTick=0,lastPhase='',lastOrder=-1;
+const newGame=()=>createGame(memory,motorUI?{motorMode:motorUI.state.mode,motorSwarm:motorUI.state.swarm}:{});
 const idle=()=>['idle','served'].includes(game.phase)&&!game.ended;
 function beep(kind) {
   if(!sound) return;
@@ -42,10 +44,23 @@ function eventUI(event) {
 }
 function updateUI() {
   const live=memory.flies[inspect].live,flyState=game.world.flies[inspect];
+  motorUI.update(game,inspect);
   text('brainSignal',live.fruit===null?'No scent · resting':`${FRUITS[live.fruit].name} scent`);
   text('brainActive',`${live.kc.filter(x=>x>.08).length}`);text('brainOutput',live.mbon.toFixed(2));
   text('brainLocation',flyState.status==='perched'?PERCHES[inspect].name:{approach:'Flying to the knife',attached:'Holding the knife',returning:'Returning to perch'}[flyState.status]);
   text('sniff',`Sniff ${FRUITS[game.fruit??Number($('trainingFruit').value)].name.toLowerCase()}`);
+  const motorView=$('brainSource').value==='motor';
+  $('sniff').hidden=motorView;
+  text('brainActiveLabel',motorView?'ACTIVE FEATURES':'ACTIVE KCs');
+  text('brainOutputLabel',motorView?'MOTOR FORCE':'MBON OUTPUT');
+  $('brainCaption').textContent=motorView?'Fixed PN → KC · |activity| ×15 · six engineered outputs':'319 neurons · taste activity · schematic positions';
+  $('brainCaption').title=motorView?'Flight inputs and six force/torque outputs are engineered. Glows show absolute PN/KC activity amplified 15×; the MBON is not a motor neuron.':'Glows show taste-circuit rate activity, not measured spikes. Positions are illustrative.';
+  if(motorView){
+    const flight=motorUI.live(inspect,game);
+    text('brainSignal',game.motorMode==='autopilot'?'Autopilot · circuit idle':game.motorMode==='untrained'?'Untrained · zero output':flyState.enabled?'Learned flight readout':'Waiting for knife duty');
+    text('brainActive',flight.kc.filter(x=>x>.015).length);
+    text('brainOutput',flyState.enabled?Math.hypot(flyState.fx,flyState.fy,flyState.fz).toFixed(2):'0.00');
+  }
   text('score',game.score.toLocaleString());text('served',game.served);text('clock',game.rush?Math.ceil(game.remaining):'∞');text('clockLabel',game.rush?'SECONDS LEFT':'FREE PLAY');text('combo',game.combo>1?`${game.combo} CUT STREAK ✦`:'');
   text('mode',game.ended?'SHIFT COMPLETE':game.rush?'RUSH HOUR':'KITCHEN OPEN');
   $('chop').disabled=game.phase!=='ready'||paused;$('timingNeedle').style.left=`${game.phase==='ready'?timing(game)*98:0}%`;
@@ -55,7 +70,7 @@ function updateUI() {
     $('ticketFruits').innerHTML=game.recipe?game.recipe.fruits.map((f,i)=>`<span title="${FRUITS[f].name}${i<game.index?' sliced':''}" class="ticket-fruit ${i<game.index?'done':i===game.index?'current':''}">${FRUITS[f].emoji}</span>`).join(''):'';
     [...$('recipes').children].forEach((button,i)=>{button.disabled=!idle();button.classList.toggle('active',game.recipe?.name===RECIPES[i].name&&!idle());});$('customOrder').disabled=!idle()||!custom.size;$('cancelOrder').hidden=idle()||game.ended;
     const show=game.ended||game.phase==='served';$('roundResult').hidden=!show;
-    if(show){if(game.ended){let best=game.score;try{best=Math.max(best,Number(localStorage.getItem('fruit-fly-best-v1'))||0);}catch{}$('roundResult').innerHTML=`<b>Nice shift, chef!</b>${game.served} bowls · ${game.score} points<br>Best rush: ${best}<br><button id="freePlay">Back to free play →</button>`;$('freePlay').onclick=()=>{game=createGame(memory);lastPhase='';updateUI();};}else $('roundResult').innerHTML='<b>That’s one happy customer. ✦</b>+200 bowl bonus. Choose the next recipe!';}
+    if(show){if(game.ended){let best=game.score;try{best=Math.max(best,Number(localStorage.getItem('fruit-fly-best-v1'))||0);}catch{}$('roundResult').innerHTML=`<b>Nice shift, chef!</b>${game.served} bowls · ${game.score} points<br>Best rush: ${best}<br><button id="freePlay">Back to free play →</button>`;$('freePlay').onclick=()=>{game=newGame();lastPhase='';updateUI();};}else $('roundResult').innerHTML='<b>That’s one happy customer. ✦</b>+200 bowl bonus. Choose the next recipe!';}
   }
 }
 function init() {
@@ -67,14 +82,14 @@ function init() {
   $('customFruits').replaceChildren(...FRUITS.map((f,i)=>{const b=document.createElement('button');b.textContent=f.emoji;b.setAttribute('aria-label',f.name);b.setAttribute('aria-pressed',String(custom.has(i)));b.onclick=()=>{custom.has(i)?custom.delete(i):custom.add(i);b.setAttribute('aria-pressed',String(custom.has(i)));$('customOrder').disabled=!idle()||!custom.size;};return b;}));
   $('customOrder').onclick=()=>makeOrder({name:'Chef’s special',fruits:[...custom]});
   $('chop').onclick=()=>chop(game);
-  $('cancelOrder').onclick=()=>{const previous=game;game=createGame(memory);for(const key of ['score','served','cutCount','rush','remaining'])game[key]=previous[key];lastPhase='';lastOrder=-1;updateUI();};
+  $('cancelOrder').onclick=()=>{const previous=game;game=newGame();for(const key of ['score','served','cutCount','rush','remaining'])game[key]=previous[key];lastPhase='';lastOrder=-1;updateUI();};
   document.addEventListener('keydown',e=>{if(e.code==='Space'&&!['BUTTON','SELECT','INPUT','SUMMARY','TEXTAREA'].includes(document.activeElement?.tagName)){e.preventDefault();chop(game);}});
   $('trainingFruit').onchange=drawBrain;
   $('teach').onclick=()=>{const fruit=Number($('trainingFruit').value),before=recruit(memory,fruit).length,changes=teach(memory,[...selected],fruit,6);memoryUI();refreshCrew(game);if(game.phase==='recruit')$('kitchenCanvas').focus({preventScroll:true});lastPhase='';const unique=new Set(changes.map(c=>`${c.fly}:${c.kc}`)).size;text('trainingFeedback',`${unique} synapses strengthened. ${FRUITS[fruit].name} volunteers: ${before} → ${recruit(memory,fruit).length}. ${[...selected].map(i=>FLY_NAMES[i]).join(' + ')} learned through six pairings each.`);feedback('NEW TASTE!');beep('teach');updateUI();};
   $('selectPair').onclick=()=>{selected=new Set([0,4]);memoryUI();};
-  $('clearMemory').onclick=()=>{resetMemory(memory);game=createGame(memory);lastPhase='';lastOrder=-1;memoryUI();updateUI();text('trainingFeedback','Learning cleared. Nobody volunteers until you train them. Starter crew can be restored at any time.');};
-  $('starterMemory').onclick=()=>{resetMemory(memory);[0,1,2,0,1,2,0,1].forEach((fruit,i)=>teach(memory,[i],fruit,6,'starter'));game=createGame(memory);lastPhase='';lastOrder=-1;memoryUI();updateUI();text('trainingFeedback','Starter training restored: apple, orange and strawberry fans are ready. Kiwi still needs a lesson.');};
-  $('rush').onclick=()=>{game=createGame(memory);startRush(game);lastPhase='';lastOrder=-1;updateUI();text('liveStatus','90-second rush started. Choose your first order.');text('rush','Restart 90-second rush ↗');};
+  $('clearMemory').onclick=()=>{resetMemory(memory);game=newGame();lastPhase='';lastOrder=-1;memoryUI();updateUI();text('trainingFeedback','Learning cleared. Nobody volunteers until you train them. Starter crew can be restored at any time.');};
+  $('starterMemory').onclick=()=>{resetMemory(memory);[0,1,2,0,1,2,0,1].forEach((fruit,i)=>teach(memory,[i],fruit,6,'starter'));game=newGame();lastPhase='';lastOrder=-1;memoryUI();updateUI();text('trainingFeedback','Starter training restored: apple, orange and strawberry fans are ready. Kiwi still needs a lesson.');};
+  $('rush').onclick=()=>{game=newGame();startRush(game);lastPhase='';lastOrder=-1;updateUI();text('liveStatus','90-second rush started. Choose your first order.');text('rush','Restart 90-second rush ↗');};
   $('sound').onclick=()=>{sound=!sound;$('sound').setAttribute('aria-pressed',String(sound));text('sound',sound?'Sound on':'Sound off');beep('teach');};
   $('camera').onclick=()=>view.resetCamera();
   document.addEventListener('visibilitychange',()=>{paused=document.hidden;last=performance.now();accumulator=0;});
@@ -82,7 +97,7 @@ function init() {
 }
 function frame(now) {
   const elapsed=Math.min(.1,(now-last)/1000);last=now;
-  if(!paused){accumulator+=elapsed;while(accumulator>=DT){stepGame(game,DT);accumulator-=DT;}for(const e of game.events.splice(0))eventUI(e);view.render(game,selected,inspect);brainPanel.render(inspect,game.time);uiTick+=elapsed;if(uiTick>.04){updateUI();uiTick=0;}}
+  if(!paused){accumulator+=elapsed;while(accumulator>=DT){stepGame(game,DT);accumulator-=DT;}for(const e of game.events.splice(0))eventUI(e);view.render(game,selected,inspect);brainPanel.render(inspect,game.time,$('brainSource').value==='motor'?motorUI.live(inspect,game):null);uiTick+=elapsed;if(uiTick>.04){updateUI();uiTick=0;}}
   requestAnimationFrame(frame);
 }
-try {const response=await fetch('./data/circuit.json');if(!response.ok)throw new Error('Circuit data could not be loaded.');memory=createMemory(await response.json());game=createGame(memory);view=createSaladView($('kitchenCanvas'),{onSelect:inspectChef,onError:message=>{$('graphicsError').hidden=false;text('graphicsError',message);}});brainPanel=createBrainPanel($('neuralScope'),memory);init();requestAnimationFrame(frame);}catch(error){$('graphicsError').hidden=false;text('graphicsError',`Kitchen could not start: ${error.message}. Open the original physics lab below, or reload with WebGL enabled.`);console.error(error);}
+try {const response=await fetch('./data/circuit.json');if(!response.ok)throw new Error('Circuit data could not be loaded.');const circuit=await response.json();memory=createMemory(circuit);game=newGame();motorUI=await createMotorUI(circuit,memory,{onChange:(mode,swarm)=>{setMotorMode(game,mode,swarm);lastPhase='';updateUI();},onRestart:()=>{game=newGame();lastPhase='';lastOrder=-1;updateUI();text('motorTrainingStatus','Fresh round. Flight lesson and fruit tastes preserved. Choose an order.');}});game=newGame();view=createSaladView($('kitchenCanvas'),{onSelect:inspectChef,onError:message=>{$('graphicsError').hidden=false;text('graphicsError',message);}});brainPanel=createBrainPanel($('neuralScope'),memory);init();requestAnimationFrame(frame);}catch(error){$('graphicsError').hidden=false;text('graphicsError',`Kitchen could not start: ${error.message}. Open the original physics lab below, or reload with WebGL enabled.`);console.error(error);}

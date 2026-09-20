@@ -114,3 +114,51 @@ body.kitchen-expanded{overflow:hidden}
   .is-expanded #neuralScope{height:90px}
   .is-expanded .brain-caption{display:none}
 }
+
+/* Flight and taste learning stay independently inspectable. */
+.motor-controls{padding:12px 20px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-shrink:0;background:#f7f7eb}
+.motor-choice{flex:0 0 235px;min-width:0}
+.motor-choice label{font-size:8px;letter-spacing:1px;margin-bottom:4px}
+.motor-choice select{font-size:11px;min-width:0;width:100%;padding:7px}
+.motor-choice p{font-size:9px;line-height:1.5;color:#7d8970;margin:5px 0 0}
+.motor-school{flex:1;min-width:0;max-width:510px}
+.motor-school summary{text-align:right;padding:11px 0;font-size:10px}
+.motor-school-body{font-size:10px;line-height:1.6}
+.motor-school-body p{margin:7px 0}
+.motor-buttons{display:flex;gap:5px;flex-wrap:wrap}
+.motor-buttons button{font-size:9px;padding:7px 9px}
+.motor-explanation{color:#7d8970}
+.motor-explanation a{text-decoration:underline}
+.motor-readout{font-variant-numeric:tabular-nums;color:#315c49}
+#motorProgress{width:100%;height:8px;accent-color:#557c4e}
+.brain-source{display:flex;gap:6px;align-items:center;margin-top:7px}
+.brain-source label{font-size:8px;margin:0}
+.brain-source select{width:auto;flex:1;padding:4px;font-size:9px}
+@media(max-width:1100px){
+  .brain-source{grid-column:2;grid-row:2;margin:0;gap:4px}
+  .brain-source label{display:none}
+  .brain-source select{font-size:8px;padding:2px;width:100%}
+  .brain-location{display:none}
+}
+.is-expanded .brain-source{margin-top:7px}
+.is-expanded .brain-location{display:block}
+@media(max-width:600px){
+  .motor-controls{padding:10px 14px;gap:10px;flex-wrap:wrap}
+  .motor-choice{flex:1 1 170px}
+  .motor-school{flex:1 1 130px;max-width:none}
+  .motor-school[open]{flex-basis:100%}
+  .motor-school summary{font-size:9px}
+}
+@media(max-width:600px) and (orientation:portrait){
+  .is-expanded .brain-source{margin:0}
+  .is-expanded .brain-location{display:none}
+}
+@media(max-height:500px) and (orientation:landscape){
+  .is-expanded .motor-controls{padding:6px 15px}
+  .is-expanded .stage{min-height:180px}
+  .is-expanded .motor-choice{display:flex;align-items:center;gap:9px;flex-basis:auto}
+  .is-expanded .motor-choice label{white-space:nowrap;margin:0}
+  .is-expanded .motor-choice select{width:175px}
+  .is-expanded .motor-choice p{display:none}
+  .is-expanded .motor-school summary{padding:6px 0}
+}

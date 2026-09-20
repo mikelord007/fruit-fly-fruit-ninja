@@ -20,20 +20,20 @@ export function createBrainPanel(canvas,memory) {
   canvas.addEventListener('pointerup',()=>drag=null);canvas.addEventListener('pointercancel',()=>drag=null);
   canvas.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','r','R'].includes(e.key)){e.preventDefault();if(e.key==='ArrowLeft')yaw-=.12;if(e.key==='ArrowRight')yaw+=.12;if(e.key==='ArrowUp')pitch-=.12;if(e.key==='ArrowDown')pitch+=.12;if(e.key.toLowerCase()==='r'){yaw=-.28;pitch=.12;zoom=1;}}});
   canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(.75,Math.min(1.5,zoom-e.deltaY*.001));},{passive:false});
-  function render(index,time) {
+  function render(index,time,motorLive=null) {
     const width=canvas.clientWidth,height=canvas.clientHeight;if(!width||!height)return;
     const dpr=Math.min(devicePixelRatio||1,2);
     if(canvas.width!==Math.round(width*dpr)||canvas.height!==Math.round(height*dpr)){canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);}
     ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
-    const live=memory.flies[index].live;
-    const rates=nodes.map(n=>n.kind==='pn'?live.pn[n.index]:n.kind==='kc'?live.kc[n.index]:n.kind==='mbon'?Math.min(1,live.mbon/1.5):n.kind==='apl'?Math.min(1,live.apl*8):0);
+    const live=motorLive??memory.flies[index].live;
+    const rates=nodes.map(n=>n.kind==='pn'?Math.min(1,Math.abs(live.pn[n.index]??0)):n.kind==='kc'?Math.min(1,Math.abs(live.kc[n.index]??0)):motorLive?0:n.kind==='mbon'?Math.min(1,live.mbon/1.5):n.kind==='apl'?Math.min(1,live.apl*8):0);
     const scale=Math.min(width/3.3,height/2.2)*zoom;
     const projected=nodes.map(n=>{
       const x=n.x*Math.cos(yaw)+n.z*Math.sin(yaw),z=-n.x*Math.sin(yaw)+n.z*Math.cos(yaw),y=n.y*Math.cos(pitch)-z*Math.sin(pitch),depth=n.y*Math.sin(pitch)+z*Math.cos(pitch),p=4/(4+depth);
       return {x:width/2+x*scale*p,y:height*.46-y*scale*p,z:depth,p};
     });
     ctx.strokeStyle='rgba(186,215,167,.065)';ctx.lineWidth=.55;ctx.beginPath();
-    edges.forEach((e,i)=>{if(i%9!==0||e.relation==='ppl1_to_kc')return;const a=projected[e.a],b=projected[e.b];ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);});ctx.stroke();
+    edges.forEach((e,i)=>{if(i%9!==0||e.relation==='ppl1_to_kc'||motorLive&&e.relation!=='pn_to_kc')return;const a=projected[e.a],b=projected[e.b];ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);});ctx.stroke();
     edges.forEach((e,i)=>{
       if(e.relation==='ppl1_to_kc'||rates[e.a]<.12||rates[e.b]<.08)return;
       if(e.relation!=='kc_to_mbon'&&i%5!==0)return;
@@ -47,7 +47,7 @@ export function createBrainPanel(canvas,memory) {
       if(glow>.08){const size=(n.kind==='mbon'?10:5)*p.p;const gradient=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,size);gradient.addColorStop(0,`rgba(${color},${glow*.55})`);gradient.addColorStop(1,`rgba(${color},0)`);ctx.fillStyle=gradient;ctx.fillRect(p.x-size,p.y-size,size*2,size*2);}
       ctx.fillStyle=rate>.04?`rgba(${color},${.4+glow*.6})`:'rgba(143,169,147,.34)';ctx.beginPath();ctx.arc(p.x,p.y,(n.kind==='mbon'||n.kind==='apl'?2.5:.95+glow*.8)*p.p,0,Math.PI*2);ctx.fill();
     });
-    ctx.font='8px system-ui';ctx.fillStyle='#9fbaa8';ctx.textAlign='left';ctx.fillText('PN → KC → MBON',9,height-9);ctx.textAlign='right';ctx.fillText('drag to rotate',width-9,height-9);
+    ctx.font='8px system-ui';ctx.fillStyle='#9fbaa8';ctx.textAlign='left';ctx.fillText(motorLive?'PN → KC · flight features':'PN → KC → MBON',9,height-9);if(width>=190){ctx.textAlign='right';ctx.fillText('drag to rotate',width-9,height-9);}
   }
   return {render};
 }

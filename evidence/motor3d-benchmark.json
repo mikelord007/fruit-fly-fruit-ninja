@@ -1,0 +1,505 @@
+{
+  "schema": 1,
+  "trainingSeed": 9317,
+  "evaluationSeed": 880031,
+  "heldOutStates": 300,
+  "scope": "Attached rigid-body force/torque, staged free-flight navigation excluded",
+  "limits": "Synthetic encoded state and teacher imitation; no claim of biological motor reconstruction. All crews share the fitted readout.",
+  "modes": {
+    "autopilot": {
+      "stress": {
+        "seed": 190031,
+        "description": "Unseen masses .35 to 1.5 (training .55), 1.5x initial velocities, lateral/angular impulse at 5s, 15s rollout",
+        "settled": 14,
+        "cases": [
+          {
+            "mass": 0.43332434848416596,
+            "crew": 7,
+            "error": 1.4387056903682545e-9,
+            "settled": true
+          },
+          {
+            "mass": 1.1414594517089425,
+            "crew": 3,
+            "error": 1.4389217868401839e-9,
+            "settled": true
+          },
+          {
+            "mass": 1.2907950704800895,
+            "crew": 5,
+            "error": 1.4388802861049336e-9,
+            "settled": true
+          },
+          {
+            "mass": 1.0737220790586433,
+            "crew": 3,
+            "error": 1.4388984147149076e-9,
+            "settled": true
+          },
+          {
+            "mass": 1.3345201502437702,
+            "crew": 5,
+            "error": 1.4389021755135366e-9,
+            "settled": true
+          },
+          {
+            "mass": 0.5939870549482293,
+            "crew": 3,
+            "error": 1.4391223693668484e-9,
+            "settled": true
+          },
+          {
+            "mass": 0.7768472826457582,
+            "crew": 8,
+            "error": 1.4387938234233037e-9,
+            "settled": true
+          },
+          {
+            "mass": 0.5358125406200998,
+            "crew": 5,
+            "error": 1.4389078742261406e-9,
+            "settled": true
+          },
+          {
+            "mass": 1.3062378973350859,
+            "crew": 6,
+            "error": 1.4389064243086042e-9,
+            "settled": true
+          },
+          {
+            "mass": 1.35925455839606,
+            "crew": 4,
+            "error": 1.439068817584627e-9,
+            "settled": true
+          },
+          {
+            "mass": 0.5359473749296739,
+            "crew": 5,
+            "error": 1.4387088925333598e-9,
+            "settled": true
+          },
+          {
+            "mass": 0.36521700877929103,
+            "crew": 4,
+            "error": 1.4389046973696367e-9,
+            "settled": true
+          },
+          {
+            "mass": 0.7008563654264435,
+            "crew": 6,
+            "error": 1.4388457608346602e-9,
+            "settled": true
+          },
+          {
+            "mass": 0.5665813815547153,
+            "crew": 8,
+            "error": 1.438757188646448e-9,
+            "settled": true
+          }
+        ],
+        "meanFinalPositionError": 1.4388803001311032e-9
+      },
+      "forceTorqueRMSE": 0,
+      "settled": 28,
+      "cases": 28,
+      "meanFinalPositionError": 8.58280142254872e-9,
+      "maxFinalPositionError": 9.882505045147171e-9
+    },
+    "learned": {
+      "stress": {
+        "seed": 190031,
+        "description": "Unseen masses .35 to 1.5 (training .55), 1.5x initial velocities, lateral/angular impulse at 5s, 15s rollout",
+        "settled": 14,
+        "cases": [
+          {
+            "mass": 0.43332434848416596,
+            "crew": 7,
+            "error": 0.000017919203357098595,
+            "settled": true
+          },
+          {
+            "mass": 1.1414594517089425,
+            "crew": 3,
+            "error": 0.0008421931353099017,
+            "settled": true
+          },
+          {
+            "mass": 1.2907950704800895,
+            "crew": 5,
+            "error": 0.0003858120080637771,
+            "settled": true
+          },
+          {
+            "mass": 1.0737220790586433,
+            "crew": 3,
+            "error": 0.0007452936159408455,
+            "settled": true
+          },
+          {
+            "mass": 1.3345201502437702,
+            "crew": 5,
+            "error": 0.0004127975603018884,
+            "settled": true
+          },
+          {
+            "mass": 0.5939870549482293,
+            "crew": 3,
+            "error": 0.00022413481502883437,
+            "settled": true
+          },
+          {
+            "mass": 0.7768472826457582,
+            "crew": 8,
+            "error": 0.00004872686906920048,
+            "settled": true
+          },
+          {
+            "mass": 0.5358125406200998,
+            "crew": 5,
+            "error": 0.00006067812151256383,
+            "settled": true
+          },
+          {
+            "mass": 1.3062378973350859,
+            "crew": 6,
+            "error": 0.0002724711302932609,
+            "settled": true
+          },
+          {
+            "mass": 1.35925455839606,
+            "crew": 4,
+            "error": 0.0006717410808495,
+            "settled": true
+          },
+          {
+            "mass": 0.5359473749296739,
+            "crew": 5,
+            "error": 0.00006071188363700656,
+            "settled": true
+          },
+          {
+            "mass": 0.36521700877929103,
+            "crew": 4,
+            "error": 0.0000424230969211081,
+            "settled": true
+          },
+          {
+            "mass": 0.7008563654264435,
+            "crew": 6,
+            "error": 0.00007333153843994226,
+            "settled": true
+          },
+          {
+            "mass": 0.5665813815547153,
+            "crew": 8,
+            "error": 0.000023894884142643103,
+            "settled": true
+          }
+        ],
+        "meanFinalPositionError": 0.0002772949244905408
+      },
+      "forceTorqueRMSE": 0.00021133793462494414,
+      "settled": 28,
+      "cases": 28,
+      "meanFinalPositionError": 0.00012765750673408074,
+      "maxFinalPositionError": 0.00043855800854604074
+    },
+    "untrained": {
+      "stress": {
+        "seed": 190031,
+        "description": "Unseen masses .35 to 1.5 (training .55), 1.5x initial velocities, lateral/angular impulse at 5s, 15s rollout",
+        "settled": 0,
+        "cases": [
+          {
+            "mass": 0.43332434848416596,
+            "crew": 7,
+            "error": 1.9694248246222934,
+            "settled": false
+          },
+          {
+            "mass": 1.1414594517089425,
+            "crew": 3,
+            "error": 6.406884490410281,
+            "settled": false
+          },
+          {
+            "mass": 1.2907950704800895,
+            "crew": 5,
+            "error": 5.796347773247392,
+            "settled": false
+          },
+          {
+            "mass": 1.0737220790586433,
+            "crew": 3,
+            "error": 3.8780799723826593,
+            "settled": false
+          },
+          {
+            "mass": 1.3345201502437702,
+            "crew": 5,
+            "error": 3.835972315398358,
+            "settled": false
+          },
+          {
+            "mass": 0.5939870549482293,
+            "crew": 3,
+            "error": 6.568349009916409,
+            "settled": false
+          },
+          {
+            "mass": 0.7768472826457582,
+            "crew": 8,
+            "error": 3.9348049744002127,
+            "settled": false
+          },
+          {
+            "mass": 0.5358125406200998,
+            "crew": 5,
+            "error": 2.502883607799292,
+            "settled": false
+          },
+          {
+            "mass": 1.3062378973350859,
+            "crew": 6,
+            "error": 2.5255641978341252,
+            "settled": false
+          },
+          {
+            "mass": 1.35925455839606,
+            "crew": 4,
+            "error": 4.5534928335251585,
+            "settled": false
+          },
+          {
+            "mass": 0.5359473749296739,
+            "crew": 5,
+            "error": 2.7296982604807516,
+            "settled": false
+          },
+          {
+            "mass": 0.36521700877929103,
+            "crew": 4,
+            "error": 6.343804291246315,
+            "settled": false
+          },
+          {
+            "mass": 0.7008563654264435,
+            "crew": 6,
+            "error": 3.2054446172998197,
+            "settled": false
+          },
+          {
+            "mass": 0.5665813815547153,
+            "crew": 8,
+            "error": 1.5476855465312551,
+            "settled": false
+          }
+        ],
+        "meanFinalPositionError": 3.985602622506737
+      },
+      "forceTorqueRMSE": 0.8470946301086981,
+      "settled": 0,
+      "cases": 28,
+      "meanFinalPositionError": 3.9197260157562845,
+      "maxFinalPositionError": 4.557685816288789
+    },
+    "clamped": {
+      "stress": {
+        "seed": 190031,
+        "description": "Unseen masses .35 to 1.5 (training .55), 1.5x initial velocities, lateral/angular impulse at 5s, 15s rollout",
+        "settled": 0,
+        "cases": [
+          {
+            "mass": 0.43332434848416596,
+            "crew": 7,
+            "error": 1.9694248246222934,
+            "settled": false
+          },
+          {
+            "mass": 1.1414594517089425,
+            "crew": 3,
+            "error": 6.406884490410281,
+            "settled": false
+          },
+          {
+            "mass": 1.2907950704800895,
+            "crew": 5,
+            "error": 5.796347773247392,
+            "settled": false
+          },
+          {
+            "mass": 1.0737220790586433,
+            "crew": 3,
+            "error": 3.8780799723826593,
+            "settled": false
+          },
+          {
+            "mass": 1.3345201502437702,
+            "crew": 5,
+            "error": 3.835972315398358,
+            "settled": false
+          },
+          {
+            "mass": 0.5939870549482293,
+            "crew": 3,
+            "error": 6.568349009916409,
+            "settled": false
+          },
+          {
+            "mass": 0.7768472826457582,
+            "crew": 8,
+            "error": 3.9348049744002127,
+            "settled": false
+          },
+          {
+            "mass": 0.5358125406200998,
+            "crew": 5,
+            "error": 2.502883607799292,
+            "settled": false
+          },
+          {
+            "mass": 1.3062378973350859,
+            "crew": 6,
+            "error": 2.5255641978341252,
+            "settled": false
+          },
+          {
+            "mass": 1.35925455839606,
+            "crew": 4,
+            "error": 4.5534928335251585,
+            "settled": false
+          },
+          {
+            "mass": 0.5359473749296739,
+            "crew": 5,
+            "error": 2.7296982604807516,
+            "settled": false
+          },
+          {
+            "mass": 0.36521700877929103,
+            "crew": 4,
+            "error": 6.343804291246315,
+            "settled": false
+          },
+          {
+            "mass": 0.7008563654264435,
+            "crew": 6,
+            "error": 3.2054446172998197,
+            "settled": false
+          },
+          {
+            "mass": 0.5665813815547153,
+            "crew": 8,
+            "error": 1.5476855465312551,
+            "settled": false
+          }
+        ],
+        "meanFinalPositionError": 3.985602622506737
+      },
+      "forceTorqueRMSE": 0.8470946301086981,
+      "settled": 0,
+      "cases": 28,
+      "meanFinalPositionError": 3.9197260157562845,
+      "maxFinalPositionError": 4.557685816288789
+    },
+    "scrambled": {
+      "stress": {
+        "seed": 190031,
+        "description": "Unseen masses .35 to 1.5 (training .55), 1.5x initial velocities, lateral/angular impulse at 5s, 15s rollout",
+        "settled": 0,
+        "cases": [
+          {
+            "mass": 0.43332434848416596,
+            "crew": 7,
+            "error": 410.8667191743598,
+            "settled": false
+          },
+          {
+            "mass": 1.1414594517089425,
+            "crew": 3,
+            "error": 5.541168875838631,
+            "settled": false
+          },
+          {
+            "mass": 1.2907950704800895,
+            "crew": 5,
+            "error": 5.746884233165725,
+            "settled": false
+          },
+          {
+            "mass": 1.0737220790586433,
+            "crew": 3,
+            "error": 5.944176275410043,
+            "settled": false
+          },
+          {
+            "mass": 1.3345201502437702,
+            "crew": 5,
+            "error": 8.510021993453202,
+            "settled": false
+          },
+          {
+            "mass": 0.5939870549482293,
+            "crew": 3,
+            "error": 5.159168495250292,
+            "settled": false
+          },
+          {
+            "mass": 0.7768472826457582,
+            "crew": 8,
+            "error": 181.00974923861565,
+            "settled": false
+          },
+          {
+            "mass": 0.5358125406200998,
+            "crew": 5,
+            "error": 3.216996006415678,
+            "settled": false
+          },
+          {
+            "mass": 1.3062378973350859,
+            "crew": 6,
+            "error": 8.83229367676077,
+            "settled": false
+          },
+          {
+            "mass": 1.35925455839606,
+            "crew": 4,
+            "error": 5.7335817859683464,
+            "settled": false
+          },
+          {
+            "mass": 0.5359473749296739,
+            "crew": 5,
+            "error": 3.702949504711754,
+            "settled": false
+          },
+          {
+            "mass": 0.36521700877929103,
+            "crew": 4,
+            "error": 187.92004867289478,
+            "settled": false
+          },
+          {
+            "mass": 0.7008563654264435,
+            "crew": 6,
+            "error": 41.09066032379333,
+            "settled": false
+          },
+          {
+            "mass": 0.5665813815547153,
+            "crew": 8,
+            "error": 427.0401322085712,
+            "settled": false
+          }
+        ],
+        "meanFinalPositionError": 92.87961074751495
+      },
+      "forceTorqueRMSE": 2.8000634682947148,
+      "settled": 0,
+      "cases": 28,
+      "meanFinalPositionError": 5.236121106502993,
+      "maxFinalPositionError": 7.1422233919487415
+    }
+  }
+}

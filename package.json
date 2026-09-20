@@ -1,9 +1,9 @@
 {
   "name": "fruit-fly-fruit-ninja",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "private": true,
   "type": "module",
-  "scripts": {"start": "node server.mjs", "test": "node --test", "experiment": "node scripts/experiment.mjs", "salad:benchmark": "node scripts/salad-benchmark.mjs"},
+  "scripts": {"start": "node server.mjs", "test": "node --test", "experiment": "node scripts/experiment.mjs", "salad:benchmark": "node scripts/salad-benchmark.mjs", "motor:train": "node scripts/motor3d-train.mjs", "motor:benchmark": "node scripts/motor3d-benchmark.mjs", "motor:gameplay": "node scripts/motor3d-gameplay.mjs"},
   "engines": {"node": ">=22"},
   "license": "MIT"
 }
