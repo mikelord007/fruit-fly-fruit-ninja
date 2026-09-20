@@ -76,7 +76,7 @@ export function createSaladView(canvas,{onSelect,onError}={}) {
   const badges=flies.map((_,i)=>{const badge=shape(new THREE.SphereGeometry(.055,10,8),0xffffff);flies[i].add(badge);badge.position.set(.14,.1,.12);return {badge};});
   const trails=flies.map(()=>{
     const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array(36*3),3));geometry.setDrawRange(0,0);
-    const line=new THREE.Line(geometry,new THREE.LineBasicMaterial({color:0x6c9578,transparent:true,opacity:.38}));scene.add(line);
+    const line=new THREE.Line(geometry,new THREE.LineBasicMaterial({color:0x6c9578,transparent:true,opacity:.38}));line.frustumCulled=false;scene.add(line);
     return {line,points:[],last:-1};
   });
   let previousWorld=null;
@@ -104,8 +104,9 @@ export function createSaladView(canvas,{onSelect,onError}={}) {
       fly.scale.setScalar(1.12);
       fly.userData.wings.forEach((w,n)=>w.rotation.x=(n?1:-1)*(.55+(state.status==='perched'?0:Math.sin(t*65+i)*.6)));
       const trail=trails[i];
-      if(state.flight&&t-trail.last>.03){trail.points.push(state.position.clone());if(trail.points.length>36)trail.points.shift();trail.last=t;}
-      if(!state.flight)trail.points=[];
+      const tracing=!!state.flight||active;
+      if(tracing&&t-trail.last>.03){trail.points.push(state.position.clone());if(trail.points.length>36)trail.points.shift();trail.last=t;}
+      if(!tracing)trail.points=[];
       const positions=trail.line.geometry.attributes.position;
       trail.points.forEach((p,j)=>positions.setXYZ(j,p.x,p.y,p.z));positions.needsUpdate=true;
       trail.line.geometry.setDrawRange(0,trail.points.length);trail.line.visible=trail.points.length>1;
