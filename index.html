@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#123c3b" />
+  <title>Fly Swarm Kitchen</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <a class="skip" href="#controls">Skip to controls</a>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <div><p class="eyebrow">tiny brains · shared load</p><h1>Fly Swarm Kitchen</h1></div>
+    </div>
+    <div class="status"><span id="statusDot" class="status-dot"></span><span id="statusText">Autopilot balancing</span></div>
+  </header>
+
+  <main>
+    <section class="stage-card" aria-labelledby="sceneTitle">
+      <div class="stage-head">
+        <div><p class="kicker">LIVE KITCHEN TEST</p><h2 id="sceneTitle">Eight flies. One rather ambitious pea.</h2></div>
+        <div class="readouts" aria-live="polite">
+          <div><span>Balance</span><strong id="balanceReadout">0.0°</strong></div>
+          <div><span>Height</span><strong id="heightReadout">0.00</strong></div>
+          <div><span>Time</span><strong id="timeReadout">0.0 s</strong></div>
+          <div><span>Lift / load</span><strong id="forceReadout">0 / 0</strong></div>
+        </div>
+      </div>
+      <div class="canvas-wrap" id="canvasWrap">
+        <canvas id="world" aria-label="Interactive 3D view of eight flies carrying a beam in a kitchen"></canvas>
+        <div class="scene-loading" id="sceneLoading" role="status">Preparing the 3D kitchen…</div>
+        <div class="scene-hint" id="sceneHint">Drag to orbit · scroll to zoom · double-click to move target · click a fly to select</div>
+        <div class="canvas-actions"><button id="cameraReset" class="pill-button" title="Reset camera">⌂ View</button><button id="cameraAngle" class="pill-button">Angled</button><button id="cameraFront" class="pill-button">Front</button><button id="cameraCrew" class="pill-button">Crew</button><button id="gustButton" class="pill-button">💨 Gust</button><button id="pauseButton" class="pill-button">Ⅱ Pause</button></div>
+        <div class="scene-error" id="sceneError" hidden><strong>3D view unavailable</strong><span id="sceneErrorText">Your browser could not start WebGL.</span><a href="./index2d.html">Open the 2D fallback</a></div>
+      </div>
+      <div class="legend" aria-label="Scene legend"><span><i class="legend-fly"></i>fly thrust</span><span><i class="legend-target"></i>target</span><span><i class="legend-load"></i>payload</span><span class="model-note">3D display · validated mechanics run in the normalized side-view plane</span></div>
+    </section>
+
+    <aside id="controls" class="control-column" aria-label="Simulation controls">
+      <section class="panel mission-panel">
+        <p class="kicker">MISSION</p>
+        <div class="segmented" role="group" aria-label="Mission">
+          <button class="segment active" data-mission="balance">Lift &amp; Balance</button>
+          <button class="segment" data-mission="carry">Carry a Pea</button>
+        </div>
+        <label class="range-label" for="massRange"><span>Payload mass</span><output id="massOutput">1.0×</output></label>
+        <input id="massRange" type="range" min="0.4" max="2.2" value="1" step="0.1" />
+        <div class="target-inputs" aria-label="Target coordinates">
+          <label for="targetX">Target X <input id="targetX" type="number" min="-4.4" max="4.4" step="0.1" inputmode="decimal" /></label>
+          <label for="targetY">Target Y <input id="targetY" type="number" min="0.2" max="4.5" step="0.1" inputmode="decimal" /></label>
+        </div>
+      </section>
+
+      <section class="panel brain-panel">
+        <div class="panel-title"><div><p class="kicker">FLIGHT CONTROL</p><h3>Who is steering?</h3></div><span class="info" title="Compare a stable engineering controller with neural action policies.">i</span></div>
+        <div class="mode-list" role="radiogroup" aria-label="Controller mode">
+          <label><input type="radio" name="mode" value="autopilot" checked /><span><b>Autopilot</b><small>Engineering reference controller</small></span></label>
+          <label><input type="radio" name="mode" value="learned" /><span><b>Learned action readout</b><small>Fixed anatomy, trained output weights</small></span></label>
+          <label><input type="radio" name="mode" value="untrained" /><span><b>Untrained</b><small>Zero weights · learning disabled</small></span></label>
+        </div>
+        <button id="trainButton" class="primary">Train readout <span>real trajectories</span></button>
+        <div class="train-track" aria-hidden="true"><i id="trainFill"></i></div>
+        <p id="trainStatus" class="microcopy">Training adjusts only the action readout. The anatomical graph stays fixed.</p>
+        <button id="resetLearning" class="text-button">Reset learned memory</button>
+      </section>
+
+      <section class="panel fly-panel">
+        <div class="panel-title"><div><p class="kicker">CREW</p><h3 id="flyTitle">Fly 1 · Port tip</h3></div><button id="toggleFly" class="mini-button">Remove</button></div>
+        <div class="fly-picker" id="flyPicker" aria-label="Select a fly"></div>
+        <div class="sense-grid">
+          <div><span>Height error</span><strong id="senseHeight">+0.00</strong></div><div><span>Tilt sensed</span><strong id="senseTilt">0.0°</strong></div>
+          <div><span>Vertical speed</span><strong id="senseVelocity">0.00</strong></div><div><span>Thrust command</span><strong id="senseThrust">0%</strong></div>
+        </div>
+      </section>
+
+      <section class="panel circuit-panel">
+        <div class="panel-title"><div><p class="kicker">NEURAL ACTIVITY</p><h3>Sense → action</h3></div><span id="circuitState" class="tag">live</span></div>
+        <canvas id="circuit" width="480" height="220" aria-label="Simplified interactive neural activity graph"></canvas>
+        <p class="microcopy"><b>Teaching view:</b> an anatomical PN→KC graph drives an adjustable action readout. It is not a claim about a complete fly flight circuit.</p>
+        <p id="evidenceSummary" class="microcopy"></p>
+        <p id="readoutSummary" class="microcopy"></p>
+      </section>
+
+      <section class="panel judge-panel">
+        <div class="panel-title"><div><p class="kicker">FAIR TEST</p><h3>Judge this controller</h3></div><strong id="scoreGrade" class="grade">—</strong></div>
+        <button id="judgeButton" class="secondary">Run 8-second test</button>
+        <button id="judgeReplay" class="text-button" disabled>Replay judged setup</button>
+        <div class="score-row"><span>Time aloft</span><b id="scoreAloft">—</b></div>
+        <div class="score-row"><span>Mean tilt</span><b id="scoreTilt">—</b></div>
+        <div class="score-row"><span>Target error</span><b id="scoreTarget">—</b></div>
+      </section>
+
+      <section class="panel session-panel">
+        <label for="seedInput">Experiment seed</label><div class="seed-row"><input id="seedInput" value="SWARM-08" spellcheck="false" /><button id="resetButton" class="mini-button">Reset</button></div>
+        <button id="replayButton" class="text-button">↻ Restart scenario</button>
+      </section>
+    </aside>
+  </main>
+  <footer><span>Built as a playful control-systems teaching demo. <a href="./index2d.html">Use the 2D view</a></span><span>Physics values update from the running simulation.</span></footer>
+  <script>const showLoadError=e=>{document.querySelector('#statusText').textContent='Simulation could not start';document.querySelector('#statusDot').classList.add('paused');const box=document.querySelector('#sceneError'),text=document.querySelector('#sceneErrorText');text.textContent='Load error: '+(e.reason?.message||e.message||'required file unavailable');box.hidden=false;document.querySelector('#sceneLoading').hidden=true};addEventListener('unhandledrejection',showLoadError);addEventListener('error',showLoadError)</script>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

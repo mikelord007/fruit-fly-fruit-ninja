@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-09-19T17:12:30.019876+00:00",
+  "release": "MaleCNS v1.0",
+  "official_download_page": "https://male-cns.janelia.org/download/",
+  "license": {
+    "name": "Creative Commons Attribution 4.0 International",
+    "spdx": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "FlyEM at HHMI Janelia, University of Cambridge, MRC Laboratory of Molecular Biology, and Google Research",
+  "sources": [
+    {
+      "role": "annotations",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+      "filename": "annotations.feather",
+      "bytes": 14483314,
+      "sha256": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2"
+    },
+    {
+      "role": "connectome_weights",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/connectome-weights-male-cns-v1.0-minconf-0.5.feather",
+      "filename": "weights.feather",
+      "bytes": 1051241946,
+      "sha256": "e35da783d1c686b2b58b3b87cd6a403ae43bfcfba8bff28e08ef752c1a56afc1"
+    }
+  ],
+  "edge_semantics": "weight is the MaleCNS pairwise raw synaptic contact count; it is not a physiological strength, conductance, sign, or probability. This pair table contains only body_pre, body_post, and weight, so it has no synapse coordinates or compartment locations.",
+  "interpretation_limits": "The retained class=ALPN population includes VP-family and ilPN/ivPN types. Sensory modality and neurotransmitter/sign were not checked from a neurotransmitter or synapse-location table. Any model that treats all pn_to_kc edges as excitatory odor channels adds an explicit modeling assumption not established by this extraction.",
+  "reproduce": "python tools/extract_data.py --annotations ../../work/annotations.feather --weights ../../work/weights.feather --output-dir data --kc-count 192",
+  "output": {
+    "file": "circuit.json",
+    "sha256": "e00582e5d828d727f89325ff9e662176179ef2268460dbbfedb1a1cfc7d0b9d1",
+    "neuron_count": 319,
+    "projection_neuron_count": 124,
+    "edge_count": 2117,
+    "edges_by_relation": {
+      "apl_to_kc": 192,
+      "kc_to_apl": 192,
+      "kc_to_mbon": 192,
+      "pn_to_kc": 1362,
+      "ppl1_to_kc": 179
+    }
+  }
+}

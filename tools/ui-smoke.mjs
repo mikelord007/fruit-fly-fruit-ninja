@@ -1,0 +1,54 @@
+import {Window} from 'happy-dom';
+import {createCanvas} from '@napi-rs/canvas';
+import {readFile,writeFile} from 'node:fs/promises';
+import {pathToFileURL, fileURLToPath} from 'node:url';
+import assert from 'node:assert/strict';
+const project=fileURLToPath(new URL('..', import.meta.url)).replaceAll('\\', '/').replace(/\/$/, '');
+const window=new Window({url:'http://127.0.0.1:5184'});
+window.document.write(await readFile(project+'/index2d.html','utf8'));
+for(const key of ['document','localStorage','navigator']) Object.defineProperty(globalThis,key,{value:window[key],configurable:true});
+globalThis.window=window;globalThis.devicePixelRatio=1;
+const drawn=new Map();
+for(const el of document.querySelectorAll('canvas')) {
+  const width=el.id==='world'?900:320,height=el.id==='world'?520:138;
+  const native=createCanvas(width,height);drawn.set(el.id,native);
+  el.width=width;el.height=height;
+  Object.defineProperty(el,'clientWidth',{value:width});Object.defineProperty(el,'clientHeight',{value:height});
+  el.getContext=()=>native.getContext('2d');
+  el.getBoundingClientRect=()=>({width,height,left:0,top:0,right:width,bottom:height});
+  el.parentElement.getBoundingClientRect=el.getBoundingClientRect;
+}
+globalThis.fetch=async url=>{try{return new Response(await readFile(new URL(String(url),pathToFileURL(project+'/'))), {status:200})}catch{return new Response('',{status:404})}};
+let callback=null;
+globalThis.requestAnimationFrame=fn=>{callback=fn;return 1};
+globalThis.Worker=class {postMessage(){} terminate(){}};
+await import(pathToFileURL(project+'/src/app2d.js'));
+let now=performance.now();
+function advance(frames){for(let i=0;i<frames;i++){now+=1000/60;callback(now)}}
+advance(600);
+assert.ok(document.querySelector('#timeReadout').textContent!=='0.0 s');
+const balanced=document.querySelector('#heightReadout').textContent;
+await writeFile(project+'/evidence/scene-render.png',drawn.get('world').toBuffer('image/png'));
+const pause=document.querySelector('#pauseButton');pause.click();const t=document.querySelector('#timeReadout').textContent;advance(60);assert.equal(document.querySelector('#timeReadout').textContent,t);pause.click();
+document.querySelector('[data-mission="carry"]').click();advance(600);
+await writeFile(project+'/evidence/carry-render.png',drawn.get('world').toBuffer('image/png'));
+document.querySelector('#toggleFly').click();assert.match(document.querySelector('#toggleFly').textContent,/Restore/);advance(120);
+document.querySelector('#toggleFly').click();assert.match(document.querySelector('#toggleFly').textContent,/Remove/);
+document.querySelector('#gustButton').click();advance(360);
+const learned=document.querySelector('input[value="learned"]');learned.checked=true;learned.dispatchEvent(new window.Event('change'));document.querySelector('#resetButton').click();advance(600);
+const learnedHeight=document.querySelector('#heightReadout').textContent;
+assert.ok(parseFloat(learnedHeight)>1,`pretrained model should lift, got ${learnedHeight}`);
+await writeFile(project+'/evidence/circuit-render.png',drawn.get('circuit').toBuffer('image/png'));
+document.querySelector('#judgeButton').click();advance(510);
+const score=()=>['scoreGrade','scoreAloft','scoreTilt','scoreTarget'].map(id=>document.getElementById(id).textContent);
+const firstScore=score();document.querySelector('#judgeReplay').click();advance(510);assert.deepEqual(score(),firstScore,'judged replay metrics must match');
+const untrainedBeforeReset=document.querySelector('input[value="untrained"]');untrainedBeforeReset.checked=true;untrainedBeforeReset.dispatchEvent(new window.Event('change'));document.querySelector('#resetButton').click();advance(300);
+assert.ok(parseFloat(document.querySelector('#heightReadout').textContent)<.3,'untrained mode must not use loaded learned policy');
+document.querySelector('#resetLearning').click();
+const untrained=document.querySelector('input[value="untrained"]');untrained.checked=true;untrained.dispatchEvent(new window.Event('change'));document.querySelector('#resetButton').click();advance(300);
+const fallen=document.querySelector('#heightReadout').textContent;
+assert.ok(parseFloat(fallen)<.3,`untrained should fall, got ${fallen}`);
+console.log(JSON.stringify({harness:'DOM and real Canvas renderer (not browser layout)',balancedHeight:balanced,learnedHeight,untrainedHeight:fallen,pause:true,mission:true,removeRestore:true,gust:true,judge:firstScore,deterministicReplay:true},null,2));
+await window.happyDOM.abort();
+
+

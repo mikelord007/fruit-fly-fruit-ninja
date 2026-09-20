@@ -1,0 +1,384 @@
+{
+  "description": "Ten-second physical trials, deterministic impulse at 2 s; normalized units.",
+  "trials": 20,
+  "successes": 20,
+  "forceBound": 8,
+  "maxObservedForce": 8,
+  "results": [
+    {
+      "options": {
+        "seed": 800,
+        "mass": 0.6,
+        "angle": -0.5,
+        "target": {
+          "x": -3,
+          "y": 1.7
+        },
+        "disabled": [
+          1,
+          6
+        ]
+      },
+      "success": true,
+      "finalDistance": 2.972686549392735e-7,
+      "finalTilt": -8.918052363120172e-14,
+      "maxTilt": 0.4994444444444444,
+      "maxForce": 2.3291882393665513
+    },
+    {
+      "options": {
+        "seed": 801,
+        "mass": 0.6736842105263158,
+        "angle": -0.45,
+        "target": {
+          "x": 3,
+          "y": 2.1
+        },
+        "disabled": [
+          1
+        ]
+      },
+      "success": true,
+      "finalDistance": 5.305912092634981e-7,
+      "finalTilt": -9.587550168284331e-14,
+      "maxTilt": 0.4495,
+      "maxForce": 2.228974268515446
+    },
+    {
+      "options": {
+        "seed": 802,
+        "mass": 0.7473684210526316,
+        "angle": -0.4,
+        "target": {
+          "x": -3,
+          "y": 2.5
+        },
+        "disabled": []
+      },
+      "success": true,
+      "finalDistance": 3.467903962572327e-7,
+      "finalTilt": -1.0119485528934538e-13,
+      "maxTilt": 0.39955555555555555,
+      "maxForce": 2.4662927092797253
+    },
+    {
+      "options": {
+        "seed": 803,
+        "mass": 0.8210526315789473,
+        "angle": -0.35,
+        "target": {
+          "x": 3,
+          "y": 1.7
+        },
+        "disabled": [
+          1,
+          6
+        ]
+      },
+      "success": true,
+      "finalDistance": 5.70641416144839e-7,
+      "finalTilt": -1.0576977394949579e-13,
+      "maxTilt": 0.3496111111111111,
+      "maxForce": 3.3828391494702768
+    },
+    {
+      "options": {
+        "seed": 804,
+        "mass": 0.894736842105263,
+        "angle": -0.3,
+        "target": {
+          "x": -3,
+          "y": 2.1
+        },
+        "disabled": [
+          4
+        ]
+      },
+      "success": true,
+      "finalDistance": 3.7988229902705763e-7,
+      "finalTilt": -1.0945170105909942e-13,
+      "maxTilt": 0.2996666666666666,
+      "maxForce": 3.0133647885265824
+    },
+    {
+      "options": {
+        "seed": 805,
+        "mass": 0.9684210526315788,
+        "angle": -0.25,
+        "target": {
+          "x": 3,
+          "y": 2.5
+        },
+        "disabled": []
+      },
+      "success": true,
+      "finalDistance": 5.984866177323905e-7,
+      "finalTilt": -1.1282532446173669e-13,
+      "maxTilt": 0.2497222222222222,
+      "maxForce": 3.164736733613945
+    },
+    {
+      "options": {
+        "seed": 806,
+        "mass": 1.0421052631578946,
+        "angle": -0.19999999999999996,
+        "target": {
+          "x": -3,
+          "y": 1.7
+        },
+        "disabled": [
+          1,
+          6
+        ]
+      },
+      "success": true,
+      "finalDistance": 4.0355823924943343e-7,
+      "finalTilt": -1.1560469092953594e-13,
+      "maxTilt": 0.1997777777777777,
+      "maxForce": 3.6440350711697973
+    },
+    {
+      "options": {
+        "seed": 807,
+        "mass": 1.1157894736842104,
+        "angle": -0.14999999999999997,
+        "target": {
+          "x": 3,
+          "y": 2.1
+        },
+        "disabled": [
+          7
+        ]
+      },
+      "success": true,
+      "finalDistance": 6.164576761660538e-7,
+      "finalTilt": -1.2000698189773804e-13,
+      "maxTilt": 0.14983333333333332,
+      "maxForce": 4.6080596258111655
+    },
+    {
+      "options": {
+        "seed": 808,
+        "mass": 1.1894736842105262,
+        "angle": -0.09999999999999998,
+        "target": {
+          "x": -3,
+          "y": 2.5
+        },
+        "disabled": []
+      },
+      "success": true,
+      "finalDistance": 4.187623431404627e-7,
+      "finalTilt": -1.223096815039298e-13,
+      "maxTilt": 0.09988888888888886,
+      "maxForce": 3.4748569956254243
+    },
+    {
+      "options": {
+        "seed": 809,
+        "mass": 1.263157894736842,
+        "angle": -0.04999999999999999,
+        "target": {
+          "x": 3,
+          "y": 1.7
+        },
+        "disabled": [
+          1,
+          6
+        ]
+      },
+      "success": true,
+      "finalDistance": 6.319769115140882e-7,
+      "finalTilt": -1.243502373836127e-13,
+      "maxTilt": 0.04994444444444443,
+      "maxForce": 4.064700074944413
+    },
+    {
+      "options": {
+        "seed": 810,
+        "mass": 1.3368421052631578,
+        "angle": 0,
+        "target": {
+          "x": -3,
+          "y": 2.1
+        },
+        "disabled": [
+          2
+        ]
+      },
+      "success": true,
+      "finalDistance": 7.565431998227832e-8,
+      "finalTilt": -4.202558230230048e-14,
+      "maxTilt": 0.0091796007735831,
+      "maxForce": 4.2119483071798305
+    },
+    {
+      "options": {
+        "seed": 811,
+        "mass": 1.4105263157894736,
+        "angle": 0.050000000000000044,
+        "target": {
+          "x": 3,
+          "y": 2.5
+        },
+        "disabled": []
+      },
+      "success": true,
+      "finalDistance": 3.0600783543284787e-7,
+      "finalTilt": -4.814503559811148e-14,
+      "maxTilt": 0.049944444444444486,
+      "maxForce": 4.005165593456919
+    },
+    {
+      "options": {
+        "seed": 812,
+        "mass": 1.4842105263157892,
+        "angle": 0.10000000000000009,
+        "target": {
+          "x": -3,
+          "y": 1.7
+        },
+        "disabled": [
+          1,
+          6
+        ]
+      },
+      "success": true,
+      "finalDistance": 1.220808196313189e-7,
+      "finalTilt": -5.3643752986741954e-14,
+      "maxTilt": 0.09988888888888897,
+      "maxForce": 4.972457573832631
+    },
+    {
+      "options": {
+        "seed": 813,
+        "mass": 1.5578947368421052,
+        "angle": 0.15000000000000002,
+        "target": {
+          "x": 3,
+          "y": 2.1
+        },
+        "disabled": [
+          5
+        ]
+      },
+      "success": true,
+      "finalDistance": 3.479741384052422e-7,
+      "finalTilt": -5.863990049963738e-14,
+      "maxTilt": 0.14983333333333335,
+      "maxForce": 4.59415672903811
+    },
+    {
+      "options": {
+        "seed": 814,
+        "mass": 1.6315789473684208,
+        "angle": 0.20000000000000007,
+        "target": {
+          "x": -3,
+          "y": 2.5
+        },
+        "disabled": []
+      },
+      "success": true,
+      "finalDistance": 1.602111923422817e-7,
+      "finalTilt": -6.324300336779071e-14,
+      "maxTilt": 0.1997777777777778,
+      "maxForce": 5.1508685881098
+    },
+    {
+      "options": {
+        "seed": 815,
+        "mass": 1.7052631578947368,
+        "angle": 0.25,
+        "target": {
+          "x": 3,
+          "y": 1.7
+        },
+        "disabled": [
+          1,
+          6
+        ]
+      },
+      "success": true,
+      "finalDistance": 3.826524220990654e-7,
+      "finalTilt": -6.746142395778574e-14,
+      "maxTilt": 0.2497222222222222,
+      "maxForce": 6.10292743013255
+    },
+    {
+      "options": {
+        "seed": 816,
+        "mass": 1.7789473684210524,
+        "angle": 0.30000000000000004,
+        "target": {
+          "x": -3,
+          "y": 2.1
+        },
+        "disabled": [
+          0
+        ]
+      },
+      "success": true,
+      "finalDistance": 1.9189030720910523e-7,
+      "finalTilt": -7.131216002832948e-14,
+      "maxTilt": 0.29968429779667255,
+      "maxForce": 8
+    },
+    {
+      "options": {
+        "seed": 817,
+        "mass": 1.8526315789473684,
+        "angle": 0.3500000000000001,
+        "target": {
+          "x": 3,
+          "y": 2.5
+        },
+        "disabled": []
+      },
+      "success": true,
+      "finalDistance": 4.118254426164359e-7,
+      "finalTilt": -7.496336212706963e-14,
+      "maxTilt": 0.3496111111111112,
+      "maxForce": 6.022450464187874
+    },
+    {
+      "options": {
+        "seed": 818,
+        "mass": 1.926315789473684,
+        "angle": 0.4,
+        "target": {
+          "x": -3,
+          "y": 1.7
+        },
+        "disabled": [
+          1,
+          6
+        ]
+      },
+      "success": true,
+      "finalDistance": 2.1871150312422639e-7,
+      "finalTilt": -7.833420361102294e-14,
+      "maxTilt": 0.39957460128054606,
+      "maxForce": 8
+    },
+    {
+      "options": {
+        "seed": 819,
+        "mass": 2,
+        "angle": 0.45000000000000007,
+        "target": {
+          "x": 3,
+          "y": 2.1
+        },
+        "disabled": [
+          3
+        ]
+      },
+      "success": true,
+      "finalDistance": 4.3663077227406747e-7,
+      "finalTilt": -8.148615470612296e-14,
+      "maxTilt": 0.4495,
+      "maxForce": 6.975804495395138
+    }
+  ]
+}
