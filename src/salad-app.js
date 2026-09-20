@@ -37,6 +37,9 @@ function inspectChef(index) {inspect=index;$('inspectFly').value=String(index);$
 function choose(index) {selected.has(index)?selected.delete(index):selected.add(index);inspectChef(index);memoryUI();}
 function makeOrder(recipe) {if(order(game,recipe)){lastPhase='';lastOrder=-1;$('kitchenCanvas').focus({preventScroll:true});beep('order');text('liveStatus',`${recipe.name} ordered. ${FRUITS[game.fruit].name} fans, report to the knife.`);updateUI();}}
 function eventUI(event) {
+  // Follow the current ingredient's crew once on recruitment, while leaving
+  // manual inspection available until the next ingredient or crew change.
+  if(event.type==='recruit'&&event.crew.length>=2)inspectChef(event.crew.includes(inspect)?inspect:event.crew[0]);
   if(event.type==='slice'){feedback(event.quality);beep('slice');text('liveStatus',`${event.quality} ${FRUITS[game.fruit].name} sliced by blade contact.`);}
   if(event.type==='served'){feedback('ORDER UP!');beep('served');text('liveStatus',`${game.recipe.name} served. ${game.score} points.`);}
   if(event.type==='ready'){beep('ready');text('liveStatus','Knife ready. Press Space or Chop when the marker reaches the green zone.');}
