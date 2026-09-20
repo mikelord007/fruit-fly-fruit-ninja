@@ -2,6 +2,7 @@ import * as THREE from '../vendor/three/three.module.js';
 import {OrbitControls} from '../vendor/three/OrbitControls.js';
 import {buildKitchenScene,pickRayFly} from './scene3d.js';
 import {FRUITS,responses} from './fruit-memory.js';
+import {createFruitModel as fruitMesh} from './fruit-models.js';
 import {PERCHES,KNIFE_HOME,gripPoint} from './flight3d.js';
 const material=(color,extras={})=>new THREE.MeshStandardMaterial({color,roughness:.5,...extras});
 function shape(geometry,color,x=0,y=0,z=0) {const m=new THREE.Mesh(geometry,material(color));m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;return m;}
@@ -9,19 +10,6 @@ function label(text,color='#234842') {
   const canvas=document.createElement('canvas');canvas.width=512;canvas.height=128;
   const c=canvas.getContext('2d');c.fillStyle=color;c.font='bold 58px system-ui';c.textAlign='center';c.fillText(text,256,85);
   const texture=new THREE.CanvasTexture(canvas),sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:texture,depthTest:false}));sprite.scale.set(1.35,.3375,1);return sprite;
-}
-function fruitMesh(index,half=null) {
-  const group=new THREE.Group(),f=FRUITS[index],r=.43;
-  const skin=shape(new THREE.SphereGeometry(r,28,20,0,Math.PI*2,half==='bottom'?Math.PI/2:0,half?Math.PI/2:Math.PI),f.hex);
-  if(index===2) skin.scale.set(.9,1.08,.9);
-  if(index===3) skin.material.color.setHex(0x957047);
-  group.add(skin);
-  if(half) {const face=shape(new THREE.CircleGeometry(r,32),index===0?0xffecc4:index===1?0xffd379:index===2?0xffadbb:0xb8db64);face.rotation.x=half==='bottom'?-Math.PI/2:Math.PI/2;group.add(face);
-    for(let i=0;i<8;i++){const a=i*Math.PI/4;const seed=shape(new THREE.SphereGeometry(.025,6,4),index===3?0x312a21:0xfff4cc,Math.cos(a)*.23,half==='bottom'?.004:-.004,Math.sin(a)*.23);seed.scale.y=.15;group.add(seed);}
-  }
-  if(half!=='bottom'&&index!==3) {const stem=shape(new THREE.CylinderGeometry(.027,.033,.16,8),0x67552e,0,.46,0);stem.rotation.z=-.2;group.add(stem);const leaf=shape(new THREE.SphereGeometry(.12,10,8),0x628443,.13,.48,0);leaf.scale.set(1.5,.24,.7);leaf.rotation.z=.3;group.add(leaf);}
-  if(index===2)for(let i=0;i<18;i++){const a=i*2.4,y=half==='bottom'?-.08-(i%4)*.065:half==='top'?.08+(i%4)*.065:-.25+(i%7)*.075;const rr=Math.sqrt(Math.max(0,r*r-y*y));const seed=shape(new THREE.SphereGeometry(.022,6,4),0xffd885,Math.cos(a)*rr*.91,y,Math.sin(a)*rr*.91);group.add(seed);}
-  return group;
 }
 export function syncFlyTransforms(beamRig,scene,flies,world) {
   beamRig.position.set(world.x,world.y,world.z);beamRig.quaternion.copy(world.orientation);
