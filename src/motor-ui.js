@@ -3,14 +3,14 @@ const $=id=>document.getElementById(id);
 const KEY='fruit-fly-motor3d-v1';
 const COPY={autopilot:'Engineering reference: bounded forces and rotation.',learned:'Trained PN → KC readout steers the knife in XYZ.',untrained:'Zero motor output. Fruit preferences stay intact.'};
 export async function createMotorUI(circuit,memory,{onChange,onRestart}) {
-  const state={mode:'autopilot',swarm:createMotorSwarm(circuit)};
+  const state={mode:'learned',swarm:createMotorSwarm(circuit)};
   let shipped=null,worker=null;
   const status=message=>$('motorTrainingStatus').textContent=message;
   try{
     const response=await fetch('./data/motor3d-policy.json');
     if(!response.ok)throw new Error('No shipped flight policy');
     shipped=await response.json();state.swarm=deserializeMotorSwarm(circuit,shipped);
-    status('A trained 3D flight lesson is ready. Switch to Learned action readout to try it.');
+    status('A trained 3D flight lesson is ready. Learned action readout is steering.');
   }catch{status('No saved flight lesson is available. Train a new readout here.');}
   try{
     const saved=localStorage.getItem(KEY);
