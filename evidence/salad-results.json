@@ -1,0 +1,1114 @@
+{
+  "schema": 1,
+  "description": "Deterministic software simulation; no biological validation. Perfect timing input is supplied programmatically.",
+  "starterResponses": [
+    {
+      "name": "Pip",
+      "responses": [
+        1.1263586658703773,
+        0.413942397761335,
+        0.27373651825122086,
+        0.32392345530549865
+      ]
+    },
+    {
+      "name": "Zest",
+      "responses": [
+        0.4444638937910017,
+        1.1953937607356286,
+        0.2470084042797975,
+        0.2560635786371066
+      ]
+    },
+    {
+      "name": "Dot",
+      "responses": [
+        0.28899748782109624,
+        0.2488397814358103,
+        1.171469429346745,
+        0.3039891793263213
+      ]
+    },
+    {
+      "name": "Basil",
+      "responses": [
+        1.1263586658703773,
+        0.413942397761335,
+        0.27373651825122086,
+        0.32392345530549865
+      ]
+    },
+    {
+      "name": "Miso",
+      "responses": [
+        0.4444638937910017,
+        1.1953937607356286,
+        0.2470084042797975,
+        0.2560635786371066
+      ]
+    },
+    {
+      "name": "Bean",
+      "responses": [
+        0.28899748782109624,
+        0.2488397814358103,
+        1.171469429346745,
+        0.3039891793263213
+      ]
+    },
+    {
+      "name": "Fig",
+      "responses": [
+        1.1263586658703773,
+        0.413942397761335,
+        0.27373651825122086,
+        0.32392345530549865
+      ]
+    },
+    {
+      "name": "Boba",
+      "responses": [
+        0.4444638937910017,
+        1.1953937607356286,
+        0.2470084042797975,
+        0.2560635786371066
+      ]
+    }
+  ],
+  "kiwiBefore": [],
+  "kiwiAfter": [
+    0,
+    4
+  ],
+  "recipes": [
+    {
+      "name": "Sunshine bowl",
+      "phase": "served",
+      "seconds": 26.39166666666581,
+      "cuts": 3,
+      "score": 680,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        },
+        {
+          "type": "slice",
+          "time": 13.216666666666557,
+          "quality": "PERFECT!"
+        },
+        {
+          "type": "slice",
+          "time": 22.016666666666058,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 0,
+          "crew": [
+            0,
+            3,
+            6
+          ]
+        },
+        {
+          "type": "recruit",
+          "time": 8.791666666666808,
+          "fruit": 1,
+          "crew": [
+            1,
+            4,
+            7
+          ]
+        },
+        {
+          "type": "recruit",
+          "time": 17.59166666666631,
+          "fruit": 2,
+          "crew": [
+            2,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Berry besties",
+      "phase": "served",
+      "seconds": 26.39166666666581,
+      "cuts": 3,
+      "score": 680,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        },
+        {
+          "type": "slice",
+          "time": 13.216666666666557,
+          "quality": "PERFECT!"
+        },
+        {
+          "type": "slice",
+          "time": 22.016666666666058,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 2,
+          "crew": [
+            2,
+            5
+          ]
+        },
+        {
+          "type": "recruit",
+          "time": 8.791666666666808,
+          "fruit": 0,
+          "crew": [
+            0,
+            3,
+            6
+          ]
+        },
+        {
+          "type": "recruit",
+          "time": 17.59166666666631,
+          "fruit": 2,
+          "crew": [
+            2,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Green surprise",
+      "phase": "served",
+      "seconds": 26.39166666666581,
+      "cuts": 3,
+      "score": 680,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        },
+        {
+          "type": "slice",
+          "time": 13.216666666666557,
+          "quality": "PERFECT!"
+        },
+        {
+          "type": "slice",
+          "time": 22.016666666666058,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            0,
+            4
+          ]
+        },
+        {
+          "type": "recruit",
+          "time": 8.791666666666808,
+          "fruit": 1,
+          "crew": [
+            1,
+            4,
+            7
+          ]
+        },
+        {
+          "type": "recruit",
+          "time": 17.59166666666631,
+          "fruit": 3,
+          "crew": [
+            0,
+            4
+          ]
+        }
+      ]
+    }
+  ],
+  "pairs": [
+    {
+      "crew": [
+        0,
+        1
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        0,
+        2
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            0,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        0,
+        3
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            0,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        0,
+        4
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            0,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        0,
+        5
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            0,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        0,
+        6
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            0,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        0,
+        7
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            0,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        1,
+        2
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        1,
+        3
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        1,
+        4
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            1,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        1,
+        5
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            1,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        1,
+        6
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            1,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        1,
+        7
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            1,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        2,
+        3
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        2,
+        4
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            2,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        2,
+        5
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            2,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        2,
+        6
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            2,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        2,
+        7
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            2,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        3,
+        4
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            3,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        3,
+        5
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            3,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        3,
+        6
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            3,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        3,
+        7
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            3,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        4,
+        5
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            4,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        4,
+        6
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            4,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        4,
+        7
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            4,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        5,
+        6
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            5,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        5,
+        7
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            5,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "crew": [
+        6,
+        7
+      ],
+      "phase": "served",
+      "seconds": 8.791666666666808,
+      "cuts": 1,
+      "score": 350,
+      "served": 1,
+      "contacts": [
+        {
+          "type": "slice",
+          "time": 4.416666666666676,
+          "quality": "PERFECT!"
+        }
+      ],
+      "recruitments": [
+        {
+          "type": "recruit",
+          "time": 0,
+          "fruit": 3,
+          "crew": [
+            6,
+            7
+          ]
+        }
+      ]
+    }
+  ],
+  "reset": {
+    "phase": "waiting",
+    "seconds": 5.000000000000038,
+    "cuts": 0,
+    "score": 0,
+    "served": 0,
+    "contacts": [],
+    "recruitments": [
+      {
+        "type": "recruit",
+        "time": 0,
+        "fruit": 0,
+        "crew": []
+      }
+    ]
+  },
+  "recovery": {
+    "phase": "served",
+    "seconds": 8.791666666666808,
+    "cuts": 1,
+    "score": 350,
+    "served": 1,
+    "contacts": [
+      {
+        "type": "slice",
+        "time": 4.416666666666676,
+        "quality": "PERFECT!"
+      }
+    ],
+    "recruitments": [
+      {
+        "type": "recruit",
+        "time": 0,
+        "fruit": 0,
+        "crew": [
+          0,
+          4
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "recipesPassed": 3,
+    "recipesTotal": 3,
+    "pairsPassed": 28,
+    "pairsTotal": 28,
+    "resetBlocks": true,
+    "retrainingRecovers": true
+  }
+}

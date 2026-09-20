@@ -29,11 +29,13 @@
         </div>
       </div>
       <div class="canvas-wrap" id="canvasWrap">
-        <canvas id="world" aria-label="Interactive simulation of eight flies carrying a beam in a kitchen"></canvas>
-        <div class="scene-hint" id="sceneHint">Click the scene to move the target</div>
-        <div class="canvas-actions"><button id="gustButton" class="pill-button">💨 Gust</button><button id="pauseButton" class="pill-button">Ⅱ Pause</button></div>
+        <canvas id="world" aria-label="Interactive 3D view of eight flies carrying a beam in a kitchen"></canvas>
+        <div class="scene-loading" id="sceneLoading" role="status">Preparing the 3D kitchen…</div>
+        <div class="scene-hint" id="sceneHint">Drag to orbit · scroll to zoom · double-click to move target · click a fly to select</div>
+        <div class="canvas-actions"><button id="cameraReset" class="pill-button" title="Reset camera">⌂ View</button><button id="cameraAngle" class="pill-button">Angled</button><button id="cameraFront" class="pill-button">Front</button><button id="cameraCrew" class="pill-button">Crew</button><button id="gustButton" class="pill-button">💨 Gust</button><button id="pauseButton" class="pill-button">Ⅱ Pause</button></div>
+        <div class="scene-error" id="sceneError" hidden><strong>3D view unavailable</strong><span id="sceneErrorText">Your browser could not start WebGL.</span><a href="./index2d.html">Open the 2D fallback</a></div>
       </div>
-      <div class="legend" aria-label="Scene legend"><span><i class="legend-fly"></i>fly thrust</span><span><i class="legend-target"></i>target</span><span><i class="legend-load"></i>payload</span></div>
+      <div class="legend" aria-label="Scene legend"><span><i class="legend-fly"></i>fly thrust</span><span><i class="legend-target"></i>target</span><span><i class="legend-load"></i>payload</span><span class="model-note">3D display · validated mechanics run in the normalized side-view plane</span></div>
     </section>
 
     <aside id="controls" class="control-column" aria-label="Simulation controls">
@@ -45,6 +47,10 @@
         </div>
         <label class="range-label" for="massRange"><span>Payload mass</span><output id="massOutput">1.0×</output></label>
         <input id="massRange" type="range" min="0.4" max="2.2" value="1" step="0.1" />
+        <div class="target-inputs" aria-label="Target coordinates">
+          <label for="targetX">Target X <input id="targetX" type="number" min="-4.4" max="4.4" step="0.1" inputmode="decimal" /></label>
+          <label for="targetY">Target Y <input id="targetY" type="number" min="0.2" max="4.5" step="0.1" inputmode="decimal" /></label>
+        </div>
       </section>
 
       <section class="panel brain-panel">
@@ -92,8 +98,8 @@
       </section>
     </aside>
   </main>
-  <footer><span>Built as a playful control-systems teaching demo.</span><span>Physics values update from the running simulation.</span></footer>
-  <script>const showLoadError=e=>{document.querySelector('#statusText').textContent='Simulation could not start';document.querySelector('#statusDot').classList.add('paused');const hint=document.querySelector('#sceneHint');hint.textContent='Load error: '+(e.reason?.message||e.message||'required file unavailable');hint.style.color='#9b4324';hint.style.display='block'};addEventListener('unhandledrejection',showLoadError);addEventListener('error',showLoadError)</script>
-  <script type="module" src="./src/app2d.js"></script>
+  <footer><span>Built as a playful control-systems teaching demo. <a href="./index2d.html">Use the 2D view</a></span><span>Physics values update from the running simulation.</span></footer>
+  <script>const showLoadError=e=>{document.querySelector('#statusText').textContent='Simulation could not start';document.querySelector('#statusDot').classList.add('paused');const box=document.querySelector('#sceneError'),text=document.querySelector('#sceneErrorText');text.textContent='Load error: '+(e.reason?.message||e.message||'required file unavailable');box.hidden=false;document.querySelector('#sceneLoading').hidden=true};addEventListener('unhandledrejection',showLoadError);addEventListener('error',showLoadError)</script>
+  <script type="module" src="./src/app.js"></script>
 </body>
 </html>

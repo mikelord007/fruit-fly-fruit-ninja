@@ -64,4 +64,3 @@ function clampTarget(){app.world.target.x=Math.max(-4.4,Math.min(4.4,app.world.t
 for(const [id,axis] of [['targetX','x'],['targetY','y']])$('#'+id).onchange=e=>{if(app.judge)return;const value=Number(e.target.value);if(Number.isFinite(value))app.world.target[axis]=value;clampTarget();updateTargetInputs();$('#sceneHint').textContent=`Target moved to ${app.world.target.x.toFixed(1)}, ${app.world.target.y.toFixed(1)}`};
 canvas.tabIndex=0;canvas.onkeydown=e=>{if(app.judge)return;const d=.2;if(e.key==='ArrowLeft')app.world.target.x-=d;else if(e.key==='ArrowRight')app.world.target.x+=d;else if(e.key==='ArrowUp')app.world.target.y+=d;else if(e.key==='ArrowDown')app.world.target.y-=d;else return;clampTarget();updateTargetInputs();$('#sceneHint').textContent=`Target moved to ${app.world.target.x.toFixed(1)}, ${app.world.target.y.toFixed(1)}`;e.preventDefault()};
 reset();renderFlyPicker();requestAnimationFrame(loop);
-

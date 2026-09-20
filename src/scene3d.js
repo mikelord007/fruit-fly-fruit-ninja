@@ -129,7 +129,7 @@ function targetMarker() {
 }
 
 export function buildKitchenScene() {
-  const scene = new THREE.Scene(); scene.name = 'Fly Swarm Kitchen 3D'; scene.background = new THREE.Color(0xf9ecd0); scene.fog = new THREE.Fog(0xf9ecd0, 12, 23);
+  const scene = new THREE.Scene(); scene.name = 'Fruit Fly Fruit Ninja 3D'; scene.background = new THREE.Color(0xf9ecd0); scene.fog = new THREE.Fog(0xf9ecd0, 12, 23);
   addKitchen(scene);
   const hemi = new THREE.HemisphereLight(0xfff7df, 0x164c4a, 2.15); hemi.name = 'Warm hemisphere light'; scene.add(hemi);
   const sun = new THREE.DirectionalLight(0xffe2aa, 3.2); sun.name = 'Window sunlight'; sun.position.set(-5, 8, 7); sun.castShadow = true;
@@ -238,5 +238,3 @@ export function createKitchenView(canvas, { onTarget, onSelectFly, onError } = {
   };
   return { render, resetCamera: () => presetCamera(camera, controls, 'angled'), setCameraPreset, pickTarget, dispose, scene, camera, renderer };
 }
-
-

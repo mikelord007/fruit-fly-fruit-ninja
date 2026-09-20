@@ -1,61 +1,52 @@
-# Fly Swarm Kitchen
+# Fruit Fly Fruit Ninja — the tiniest salad bar
 
-Eight tiny virtual flies, one shared load, and a very serious pea delivery service.
+A playable Three.js kitchen: choose a fruit salad, recruit flies through their learned tastes, and time a chop with their shared knife. Teach them a new taste and a different crew volunteers.
 
-Now rendered in **Three.js/WebGL**: orbit the kitchen, zoom in on the crew, inspect volumetric flies and their force arrows, and watch the load cast shadows across the countertop. Three.js is bundled locally, so the scene works offline.
+## Play
 
-Measured result: learned control passed **17/20 held-out cases**, but **0/4 harder stress cases**. The engineering teacher passed all 24. Resetting or clamping neural activity passed none. The original anatomy is fixed; only added force readouts learn. See `evidence/summary.md` for the full comparison and its limits.
-
-## Run locally
-
-Requires Node.js 22 or newer. No package installation, account, API key or GPU is needed. Double-click `launch.cmd`, or run from this folder:
+Requires Node.js 22+ and a WebGL-capable browser. No package install, API key or internet connection is needed. Double-click `launch.cmd`, or:
 
 ```powershell
 npm start
 ```
 
-Open http://127.0.0.1:5184. The server listens only on loopback. Keep its terminal running; Ctrl+C stops it. If the port is already occupied, the launcher prints an error instead of stopping another project. Internet access is not required for the simulation.
+Open **http://127.0.0.1:5184**. The server listens only on your computer. Keep its terminal running.
 
-## Try it
+1. Order **Sunshine bowl**. Apple fans fly out and lift the knife.
+2. Hit **Chop** or **Space** when the timing marker reaches the green zone. The moving blade must physically touch the fruit.
+3. Repeat for orange and strawberry; each ingredient recruits its own crew. Finish the bowl for a bonus.
+4. Order **Green surprise**. Nobody knows kiwi yet. In **Taste school**, select two chefs and teach kiwi. Their connections strengthen, they volunteer, and the waiting order continues.
+5. Try a **90-second rush**, make a custom mix, or open the brain inspector and clear learning to see volunteering disappear.
 
-Start with **Lift & Balance** and the engineering autopilot. Switch to **Carry a Pea**, move the goal, change the mass, apply a gust, or select a fly and remove it. Watch each force arrow and the beam's tilt. Pause to inspect the scene.
+Drag the scene to orbit, scroll to zoom, and click a fly or chef card to select it for training. Sound is optional. Learned tastes last until page reload; the best rush score stays in local storage. Tab hiding pauses the simulation. Canceling an order returns to the menu while keeping earned points and the remaining rush time.
 
-Drag the scene to orbit, scroll/pinch to zoom, and double-click to place the goal on the simulation plane. Click a fly to select it. Camera buttons provide overview, front and crew views; arrow keys on the focused scene move the goal. If WebGL is unavailable, open `index2d.html` for the original Canvas view. Both interfaces use the same controllers and data.
+## Learning, honestly
 
-Compare **Learned action readout** with **Untrained / learning disabled**. Train from the engineering teacher, then reset learned memory to remove that policy. The anatomical graph remains unchanged. The judge test reports actual physical outcomes rather than a scripted victory.
+The game uses an immutable real connectome extraction (319 neurons, 2,117 edges). Synthetic odors pass through anatomical PN → KC connections; each chef has independent plastic KC → MBON strengths. Starter favorites are acquired through recorded training. Teaching changes eligible connections, which changes volunteering.
 
-A measured pretrained readout ships with the app. New training runs in a Web Worker and saves locally in the browser when storage is available. The judge freezes the setup, applies a deterministic gust and offers a reproducible replay. Ordinary Restart scenario returns to the mission's initial state; it is not a recording of arbitrary manual interventions.
+The snack-learning rule is an **engineered appetitive extension**; it is not the original aversive PPL1 learning model. The motor controller is conventional physics control. The game is rendered in 3D with planar knife dynamics; food halves and plating use contact-triggered animation. It makes no claim of improving human neuroplasticity. See [GAME_MODEL.md](GAME_MODEL.md) for equations, assumptions and limits, and [DATA_PROVENANCE.md](DATA_PROVENANCE.md) for data attribution.
 
-The illustrated pea is part of the beam's total load. Delivery means holding that load at the goal, rather than dropping a separately simulated pea onto a colliding plate. All forces, masses, lengths and times are normalized simulation values, not measured fly capabilities.
+The original learned-motor laboratory remains at **/lab.html**, with its Canvas fallback at **/index2d.html**. Its measured benchmarks and model card are unchanged and apply only to that laboratory. See [LAB_README.md](LAB_README.md).
 
-**3D display, planar physics:** objects and camera are genuinely three-dimensional, while the proven rigid-body experiment still uses x/y translation and one rotation axis. This update does not claim new free-flight dynamics or retrain a three-axis controller.
-
-## Reproduce the evidence
+## Verify
 
 ```powershell
 npm test
-node scripts/physics-benchmark.mjs
-npm run experiment
+npm run salad:benchmark
 ```
 
-`evidence/physics-results.json` records 20 baseline trials, including every initial condition and outcome. `evidence/experiment-results.json` records the neural comparison and held-out trials; `evidence/trained-session.json` stores fitted readouts separately from the original anatomical data. Experiments run headlessly with deterministic fixed simulation steps.
+The current suite includes 32 tests. Salad checks cover selective plasticity, reset/retraining, anatomical wiring sensitivity, contact detection, all 28 two-chef combinations, all recipes, timing and rush expiration. Recorded simulation results are in `evidence/salad-results.json`; browser verification is in `evidence/salad-review.md`.
 
-## What the experiment does and does not show
+For the original lab: `node scripts/physics-benchmark.mjs` and `npm run experiment`.
 
-This is a rigid-body control experiment using a small real connectome subgraph as an engineered feature transform. The neural controller learns added force-output weights from an autopilot teacher. It does not learn anatomical synaptic strengths, reproduce biological motor outputs, or establish that real wiring is better than a simpler controller. No smell-learning circuit is presented as a ready-made flight controller.
+## Main files
 
-Read `MODEL_CARD.md`, `DATA_PROVENANCE.md`, and the evidence files before interpreting the results. The original anatomical JSON is copied unchanged from the licensed MaleCNS extraction; no source project was edited.
+- `src/fruit-memory.js`: odor inputs, anatomical feature circuit and independent plastic strengths.
+- `src/salad-game.js`: recruitment, phase transitions, physical knife contact and scoring.
+- `src/salad-scene.js`: kitchen, flies, knife, fruit halves, camera and visual effects.
+- `src/salad-app.js`, `index.html`, `salad.css`: playable interface and brain inspector.
+- `src/physics.js`: shared force-limited rigid-body simulator and engineering motor controller.
+- `lab.html`, `src/app.js`, `src/neural.js`: preserved motor-learning lab.
+- `vendor/three/`: locally bundled Three.js 0.186.0, MIT licensed.
 
-The original build passed 16 unit tests plus a DOM/Canvas integration check. New scene-graph tests and actual WebGL browser checks cover the 3D update; see `evidence/3d-review.md`. `evidence/ui-review.md` is the historical 2D review. Use `DEMO_SCRIPT.md` for the measured 60-second pitch.
-
-## Project map
-
-- `src/physics.js`: bounded forces, moment arms, rigid-body integration, contacts, sensors and engineering baseline.
-- `src/neural.js`: real fixed PN→KC topology, engineered encoding, per-fly readout learning and ablations.
-- `src/app.js`, `index.html`, `style.css`: interactive kitchen and inspection controls.
-- `src/scene3d.js`: Three.js geometry, lighting, picking and camera controls; it only reads physical state.
-- `src/app2d.js`, `index2d.html`: preserved 2D fallback. `vendor/three/`: pinned Three.js 0.186.0 and MIT notice.
-- `scripts/`: reproducible experiments. `tests/`: meaningful physics and controller checks.
-- `data/`: immutable anatomy and exact provenance. `evidence/`: measured results and trained state.
-
-Code: MIT. Anatomical data: CC BY 4.0, credited to FlyEM at HHMI Janelia, University of Cambridge, MRC Laboratory of Molecular Biology and Google Research. See LICENSE and THIRD_PARTY_LICENSE.
+Code: MIT. Anatomical data: CC BY 4.0, credited to FlyEM at HHMI Janelia, University of Cambridge, MRC Laboratory of Molecular Biology and Google Research. See `LICENSE`, `THIRD_PARTY_LICENSE` and `DATA_PROVENANCE.md`.

@@ -50,5 +50,3 @@ const fallen=document.querySelector('#heightReadout').textContent;
 assert.ok(parseFloat(fallen)<.3,`untrained should fall, got ${fallen}`);
 console.log(JSON.stringify({harness:'DOM and real Canvas renderer (not browser layout)',balancedHeight:balanced,learnedHeight,untrainedHeight:fallen,pause:true,mission:true,removeRestore:true,gust:true,judge:firstScore,deterministicReplay:true},null,2));
 await window.happyDOM.abort();
-
-

@@ -1,9 +1,9 @@
 {
-  "name": "fly-swarm-kitchen",
-  "version": "1.1.0",
+  "name": "fruit-fly-fruit-ninja",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
-  "scripts": {"start": "node server.mjs", "test": "node --test", "experiment": "node scripts/experiment.mjs"},
+  "scripts": {"start": "node server.mjs", "test": "node --test", "experiment": "node scripts/experiment.mjs", "salad:benchmark": "node scripts/salad-benchmark.mjs"},
   "engines": {"node": ">=22"},
   "license": "MIT"
 }

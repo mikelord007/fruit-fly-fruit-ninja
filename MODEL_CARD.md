@@ -1,4 +1,6 @@
-# Fly Swarm Kitchen — model card
+# Fruit Fly Fruit Ninja — motor laboratory model card
+
+This card describes the preserved laboratory at `lab.html`. The salad game is documented in `GAME_MODEL.md`.
 
 A virtual, normalized-unit cooperative transport experiment. This does not control insects or hardware and does not estimate a real fly's lifting capacity.
 
