@@ -1,0 +1,12 @@
+.git/
+.vercel/
+node_modules/
+work/
+tests/
+scripts/
+tools/
+server.mjs
+launch.cmd
+*.zip
+*.log
+.env*

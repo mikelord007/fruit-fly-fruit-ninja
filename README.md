@@ -2,6 +2,8 @@
 
 A playable Three.js kitchen: choose a fruit salad, recruit flies through their learned tastes, and time a chop with their shared knife. Teach them a new taste and a different crew volunteers.
 
+**Play online: https://fruit-fly-fruit-ninja.vercel.app**
+
 ## Play
 
 Requires Node.js 22+ and a WebGL-capable browser. No package install, API key or internet connection is needed. Double-click `launch.cmd`, or:
@@ -27,6 +29,10 @@ The game uses an immutable real connectome extraction (319 neurons, 2,117 edges)
 The snack-learning rule is an **engineered appetitive extension**; it is not the original aversive PPL1 learning model. The motor controller is conventional physics control. The game is rendered in 3D with planar knife dynamics; food halves and plating use contact-triggered animation. It makes no claim of improving human neuroplasticity. See [GAME_MODEL.md](GAME_MODEL.md) for equations, assumptions and limits, and [DATA_PROVENANCE.md](DATA_PROVENANCE.md) for data attribution.
 
 The original learned-motor laboratory remains at **/lab.html**, with its Canvas fallback at **/index2d.html**. Its measured benchmarks and model card are unchanged and apply only to that laboratory. See [LAB_README.md](LAB_README.md).
+
+## Deploy
+
+The project is hosted on Vercel as a static site and connected to its GitHub repository. Production deployments use `vercel.json`; no server process, build step, or package installation is needed on the host. To deploy from an authenticated Vercel CLI, run `vercel deploy --prod`. Local environment files and Vercel account metadata are excluded from uploads, Git and the download package.
 
 ## Verify
 
