@@ -82,3 +82,35 @@
 .about-game p{margin:0}
 @media(max-width:760px){.logo{gap:7px}.logo-icon{width:42px;height:42px}.about-game{font-size:11px}}
 @media(max-width:380px){.logo{font-size:20px;gap:5px}.logo-icon{width:34px;height:34px}.header{gap:10px}.header-actions{gap:5px}}
+
+.stage-tools{display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap;pointer-events:auto}
+.stage-top{gap:10px;align-items:flex-start;z-index:2}
+.open-sign{flex-shrink:0}
+body.kitchen-expanded{overflow:hidden}
+.kitchen.is-expanded{position:fixed;inset:0;z-index:1000;width:100%;height:100vh;height:100dvh;margin:0;border:0;border-radius:0;display:flex;flex-direction:column;overflow:auto;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.kitchen::backdrop{background:#f5ead4}
+.is-expanded .stage{flex:1;min-height:240px;height:auto;display:grid;grid-template-columns:minmax(0,1fr) 242px;grid-template-rows:minmax(0,1fr)}
+.is-expanded #kitchenCanvas{width:100%;height:100%;min-height:0;grid-column:1;grid-row:1}
+.is-expanded .brain-hud{position:relative;grid-column:2;grid-row:1;inset:auto;align-self:start;display:block;width:auto;height:auto;max-height:calc(100% - 75px);overflow:auto;margin:55px 14px 20px 0;padding:13px}
+.is-expanded #neuralScope{height:171px}
+.is-expanded .stage-bottom{bottom:15px;right:255px}
+.is-expanded .float-feedback{right:242px;top:35%}
+.is-expanded .action-bar,.is-expanded .live-ticket{flex-shrink:0}
+@media(max-width:600px) and (orientation:portrait){
+  .is-expanded .stage{min-height:420px;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) 208px}
+  .is-expanded .brain-hud{grid-column:1;grid-row:2;display:grid;grid-template-columns:minmax(110px,1fr) minmax(125px,1fr);grid-template-rows:30px 19px 53px 37px;column-gap:9px;margin:8px;height:192px;max-height:none;padding:9px}
+  .is-expanded #neuralScope{height:164px}
+  .is-expanded .stage-bottom{bottom:220px;right:12px}
+  .is-expanded .float-feedback{right:0;top:25%}
+  .is-expanded .stage-tools{max-width:205px}
+  .is-expanded .open-sign{font-size:7px;letter-spacing:.5px;padding:8px}
+}
+@media(max-height:500px) and (orientation:landscape){
+  .is-expanded .action-bar{padding:9px 15px}
+  .is-expanded .action-copy h2{font-size:16px;margin-bottom:3px}
+  .is-expanded .action-copy p{font-size:9px}
+  .is-expanded .live-ticket{padding:5px 0;min-height:32px}
+  .is-expanded #chop{padding:8px}
+  .is-expanded #neuralScope{height:90px}
+  .is-expanded .brain-caption{display:none}
+}

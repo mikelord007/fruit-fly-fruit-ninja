@@ -18,6 +18,8 @@ npm start
 
 Open **http://127.0.0.1:5184**. The server listens only on your computer. Keep its terminal running.
 
+Use **Fullscreen** in the kitchen's top-right corner to expand the scene, Brain panel, and chop controls. **Escape** or **Exit fullscreen** returns to the page; **Menu & training** takes you back to orders or taste school. Your current order continues across view changes. Browsers without native fullscreen use a viewport-filling view.
+
 1. Order **Sunshine bowl**. Apple fans fly out and lift the knife.
 2. Hit **Chop** or **Space** when the timing marker reaches the green zone. The moving blade must physically touch the fruit.
 3. Repeat for orange and strawberry; each ingredient recruits its own crew. Finish the bowl for a bonus.
