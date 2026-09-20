@@ -48,6 +48,15 @@ function eventUI(event) {
 function updateUI() {
   const live=memory.flies[inspect].live,flyState=game.world.flies[inspect];
   motorUI.update(game,inspect);
+  const applyingMotor=flyState.enabled||!!flyState.flight;
+  const outputs={fx:flyState.fx,fy:flyState.fy,fz:flyState.fz,tx:flyState.torque.x,ty:flyState.torque.y,tz:flyState.torque.z};
+  text('motorOutputSource',game.motorMode==='autopilot'?'Autopilot reference':game.motorMode==='untrained'?'Zero thrust':applyingMotor?'Learned readout':'Resting · no output');
+  for(const [key,applied] of Object.entries(outputs)){
+    const value=applyingMotor&&Number.isFinite(applied)?applied:0,display=Math.abs(value)<.005?0:value;
+    text(`out-${key}`,`${display>0?'+':''}${display.toFixed(2)}`);
+    const extent=Math.min(1,Math.abs(value)/(key[0]==='f'?8:.9))*50,bar=$(`bar-${key}`);
+    bar.style.width=`${extent}%`;bar.style.left=`${value<0?50-extent:50}%`;bar.classList.toggle('negative',value<0);
+  }
   text('brainSignal',live.fruit===null?'No scent · resting':`${FRUITS[live.fruit].name} scent`);
   text('brainActive',`${live.kc.filter(x=>x>.08).length}`);text('brainOutput',live.mbon.toFixed(2));
   text('brainLocation',flyState.status==='perched'?PERCHES[inspect].name:{approach:'Flying to the knife',attached:'Holding the knife',returning:'Returning to perch'}[flyState.status]);

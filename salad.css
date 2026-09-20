@@ -27,52 +27,63 @@
   #rush{max-width:115px}
 }
 
-/* The brain instrument lives inside the game frame, beside the 3D viewport. */
+/* Two instruments share one selected chef without squeezing the 3D view. */
 .stage{height:545px;background:#f5ead4}
-#kitchenCanvas{width:calc(100% - 242px);height:100%}
-.brain-hud{position:absolute;right:14px;top:57px;width:218px;padding:13px;background:#fbf9ee;border:1px solid #d4dbc6;border-radius:12px;box-shadow:0 5px 18px #3e563115}
+#kitchenCanvas{width:calc(100% - 344px);height:100%}
+.brain-hud{position:absolute;right:14px;top:57px;width:320px;padding:13px;background:#fbf9ee;border:1px solid #d4dbc6;border-radius:12px;box-shadow:0 5px 18px #3e563115}
 .brain-hud-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.brain-hud h3{font-family:Georgia,serif;font-size:19px;font-weight:400;margin:0;display:flex;gap:7px;align-items:center}
+.brain-hud h3{font-family:Georgia,serif;font-size:20px;font-weight:400;margin:0;display:flex;gap:7px;align-items:center}
 .brain-live-dot{height:6px;width:6px;background:#82a766;border-radius:50%;box-shadow:0 0 0 3px #e7edd8}
-.brain-hud select{min-width:0;width:87px;font-size:11px;padding:6px 7px;background:#eef1e3}
-.brain-location{font-size:9px;color:#849275;margin:5px 0 11px}
-#neuralScope{display:block;width:100%;height:171px;background:radial-gradient(ellipse at 45% 40%,#294438,#132a23);border:1px solid #405647;border-radius:7px;touch-action:none;cursor:grab;outline-offset:2px}
+.brain-hud select{min-width:0;width:92px;font-size:11px;padding:6px 7px;background:#eef1e3}
+.brain-location{font-size:10px;color:#708167;margin:7px 0 11px}
+.brain-instruments{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:13px;align-items:start}
+.brain-activity,.brain-outputs{min-width:0}
+#neuralScope{display:block;width:100%;height:145px;background:radial-gradient(ellipse at 45% 40%,#294438,#132a23);border:1px solid #405647;border-radius:7px;touch-action:none;cursor:grab;outline-offset:2px}
 #neuralScope:active{cursor:grabbing}
-.brain-metrics{display:grid;grid-template-columns:1fr 1fr;margin:11px 0 9px;text-align:center}
+.brain-metrics{display:grid;grid-template-columns:1fr 1fr;margin:10px 0;text-align:center}
 .brain-metrics>div+div{border-left:1px solid #dde2d1}
-.brain-metrics strong{font-size:21px;font-weight:650;font-variant-numeric:tabular-nums;letter-spacing:-.8px;display:block;line-height:1.15}
-.brain-metrics span{font-size:7px;letter-spacing:.9px;color:#8a947e;display:block;margin-top:4px}
-.brain-cue{display:flex;gap:6px;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid #e3e6d8;font-size:9px;color:#69815f}
-.brain-cue button{font-size:8px;padding:6px 7px;white-space:nowrap;background:#e9efdc;border-color:#d4dfc2}
-.brain-caption{font-size:8px;line-height:1.6;margin:10px 0 0;color:#96a187}
-.stage-bottom{right:255px;gap:7px;flex-wrap:wrap}
-.float-feedback{right:242px}
+.brain-metrics strong{font-size:18px;font-weight:650;font-variant-numeric:tabular-nums;letter-spacing:-.6px;display:block;line-height:1.15}
+.brain-metrics span{font-size:7px;letter-spacing:.25px;color:#758369;display:block;margin-top:4px}
+.brain-cue{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid #e3e6d8;font-size:9px;line-height:1.5;color:#69815f}
+.brain-cue button{font-size:9px;padding:5px 7px;background:#e9efdc;border-color:#d4dfc2}
+.brain-caption{font-size:8px;line-height:1.5;margin:8px 0 0;color:#7b896e}
+.brain-outputs{border-left:1px solid #e0e4d6;padding-left:12px}
+.outputs-heading{display:flex;align-items:center;justify-content:space-between;gap:5px}
+.outputs-heading h4{font-size:11px;margin:0;font-weight:750}
+.output-live{font-size:6px;letter-spacing:1px;color:#557c4e;background:#e9efdc;border-radius:3px;padding:3px}
+.output-source{font-size:8px;line-height:1.4;color:#7d8575;margin:4px 0 12px}
+.output-group+ .output-group{border-top:1px solid #e4e7da;padding-top:10px;margin-top:10px}
+.output-group h5{font-size:10px;margin:0 0 5px}
+.output-group h5 span{display:block;font-size:7px;font-weight:400;color:#7d8575;margin-top:2px}
+.motor-axis{display:grid;grid-template-columns:17px 42px minmax(18px,1fr);align-items:center;gap:5px;min-height:25px}
+.axis-symbol{font:10px ui-monospace,Consolas,monospace;color:#60765e}
+.motor-axis output{font:600 11px ui-monospace,Consolas,monospace;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.axis-track{position:relative;height:5px;background:#e5e8da;border-radius:4px;overflow:hidden}
+.axis-track:after{content:'';position:absolute;left:50%;top:0;height:100%;width:1px;background:#87967b}
+.axis-track i{position:absolute;height:100%;left:50%;width:0;background:#568768;border-radius:2px}
+.axis-track i.negative{background:#cf8058}
+.output-note{font-size:7px;line-height:1.5;color:#7d8575;margin:10px 0 0}
+.stage-bottom{right:357px;gap:7px;flex-wrap:wrap}
+.float-feedback{right:344px}
 @media(max-width:1100px){
-  .stage{height:595px}
-  #kitchenCanvas{width:100%;height:375px}
-  .brain-hud{left:12px;right:12px;top:auto;bottom:12px;width:auto;height:190px;display:grid;grid-template-columns:minmax(130px,1.4fr) minmax(125px,1fr);grid-template-rows:30px 19px 53px 37px;gap:0 15px;padding:12px}
-  #neuralScope{grid-column:1;grid-row:1 / 5;height:164px}
-  .brain-hud-heading{grid-column:2;grid-row:1}
-  .brain-hud h3{font-size:17px}
-  .brain-location{grid-column:2;grid-row:2;margin:3px 0}
-  .brain-metrics{grid-column:2;grid-row:3;margin:8px 0 0}
-  .brain-metrics strong{font-size:18px}
-  .brain-cue{grid-column:2;grid-row:4;flex-wrap:wrap;padding-top:6px;gap:4px;align-content:center;font-size:8px}
-  .brain-caption{grid-column:2;grid-row:5;font-size:7px;margin:3px 0 0;line-height:1.3}
-  .brain-caption br{display:none}
-  .stage-bottom{bottom:231px;right:12px}
-  .float-feedback{right:0;top:25%}
+  .stage{height:auto;display:flex;flex-direction:column}
+  #kitchenCanvas{width:100%;height:375px;flex-shrink:0}
+  .brain-hud{position:relative;inset:auto;width:auto;margin:0 12px 12px;padding:13px}
+  .brain-instruments{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+  #neuralScope{height:145px}
+  .brain-location{margin:6px 0 10px}
+  .stage-bottom{top:328px;bottom:auto;right:12px}
+  .float-feedback{right:0;top:20%}
 }
 @media(max-width:480px){
-  .stage{height:572px}
-  #kitchenCanvas{height:352px}
-  .brain-hud{left:8px;right:8px;grid-template-columns:minmax(110px,1fr) minmax(125px,1fr);column-gap:9px;padding:9px;height:191px}
-  .brain-hud select{width:72px;padding:5px;font-size:10px}
-  .brain-hud h3{font-size:16px;gap:5px}
-  .brain-live-dot{width:4px;height:4px}
-  .brain-cue button{padding:5px;font-size:8px}
-  .brain-metrics span{font-size:6px;letter-spacing:.5px}
-  .brain-caption{font-size:6.5px;line-height:1.3}
+  #kitchenCanvas{height:320px}
+  .brain-hud{margin:0 8px 8px;padding:11px}
+  .brain-instruments{gap:10px}
+  .brain-outputs{padding-left:9px}
+  .motor-axis{grid-template-columns:15px 38px minmax(12px,1fr);gap:4px}
+  .brain-hud h3{font-size:19px}
+  .brain-metrics strong{font-size:17px}
+  .stage-bottom{top:277px;font-size:8px}
 }
 
 /* Generated mascot uses a fixed box to avoid a layout shift while loading. */
@@ -89,19 +100,25 @@
 body.kitchen-expanded{overflow:hidden}
 .kitchen.is-expanded{position:fixed;inset:0;z-index:1000;width:100%;height:100vh;height:100dvh;margin:0;border:0;border-radius:0;display:flex;flex-direction:column;overflow:auto;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 .kitchen::backdrop{background:#f5ead4}
-.is-expanded .stage{flex:1;min-height:240px;height:auto;display:grid;grid-template-columns:minmax(0,1fr) 242px;grid-template-rows:minmax(0,1fr)}
+.is-expanded .stage{flex:1;min-height:240px;height:auto;display:grid;grid-template-columns:minmax(0,1fr) 344px;grid-template-rows:minmax(0,1fr)}
 .is-expanded #kitchenCanvas{width:100%;height:100%;min-height:0;grid-column:1;grid-row:1}
 .is-expanded .brain-hud{position:relative;grid-column:2;grid-row:1;inset:auto;align-self:start;display:block;width:auto;height:auto;max-height:calc(100% - 75px);overflow:auto;margin:55px 14px 20px 0;padding:13px}
-.is-expanded #neuralScope{height:171px}
-.is-expanded .stage-bottom{bottom:15px;right:255px}
-.is-expanded .float-feedback{right:242px;top:35%}
+.is-expanded #neuralScope{height:145px}
+.is-expanded .stage-bottom{top:auto;bottom:15px;right:357px}
+.is-expanded .float-feedback{right:344px;top:35%}
 .is-expanded .action-bar,.is-expanded .live-ticket{flex-shrink:0}
 @media(max-width:600px) and (orientation:portrait){
-  .is-expanded .stage{min-height:420px;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) 208px}
-  .is-expanded .brain-hud{grid-column:1;grid-row:2;display:grid;grid-template-columns:minmax(110px,1fr) minmax(125px,1fr);grid-template-rows:30px 19px 53px 37px;column-gap:9px;margin:8px;height:192px;max-height:none;padding:9px}
-  .is-expanded #neuralScope{height:164px}
-  .is-expanded .stage-bottom{bottom:220px;right:12px}
-  .is-expanded .float-feedback{right:0;top:25%}
+  .is-expanded .stage{flex:1 0 auto;min-height:625px;display:flex;flex-direction:column}
+  .is-expanded #kitchenCanvas{height:285px;min-height:285px;flex:1}
+  .is-expanded .brain-hud{display:block;flex:none;margin:0 8px 8px;align-self:stretch;max-height:none;padding:11px}
+  .is-expanded .stage-bottom{top:240px;bottom:auto;right:12px}
+  .is-expanded .float-feedback{right:0;top:20%}
+  .is-expanded .brain-location,.is-expanded .brain-caption{display:none}
+  .is-expanded #neuralScope{height:125px}
+  .is-expanded .output-source{margin-bottom:5px}
+  .is-expanded .motor-axis{min-height:20px}
+  .is-expanded .output-group+ .output-group{padding-top:6px;margin-top:6px}
+  .is-expanded .output-note{margin-top:6px}
   .is-expanded .stage-tools{max-width:205px}
   .is-expanded .open-sign{font-size:7px;letter-spacing:.5px;padding:8px}
 }
@@ -134,14 +151,6 @@ body.kitchen-expanded{overflow:hidden}
 .brain-source{display:flex;gap:6px;align-items:center;margin-top:7px}
 .brain-source label{font-size:8px;margin:0}
 .brain-source select{width:auto;flex:1;padding:4px;font-size:9px}
-@media(max-width:1100px){
-  .brain-source{grid-column:2;grid-row:2;margin:0;gap:4px}
-  .brain-source label{display:none}
-  .brain-source select{font-size:8px;padding:2px;width:100%}
-  .brain-location{display:none}
-}
-.is-expanded .brain-source{margin-top:7px}
-.is-expanded .brain-location{display:block}
 @media(max-width:600px){
   .motor-controls{padding:10px 14px;gap:10px;flex-wrap:wrap}
   .motor-choice{flex:1 1 170px}
@@ -150,8 +159,7 @@ body.kitchen-expanded{overflow:hidden}
   .motor-school summary{font-size:9px}
 }
 @media(max-width:600px) and (orientation:portrait){
-  .is-expanded .brain-source{margin:0}
-  .is-expanded .brain-location{display:none}
+  .is-expanded .brain-source{margin-top:7px}
 }
 @media(max-height:500px) and (orientation:landscape){
   .is-expanded .motor-controls{padding:6px 15px}
