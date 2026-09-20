@@ -12,7 +12,7 @@ Brand assets, image-generation prompts, and search/social metadata notes: [BRAND
 
 The kitchen starts with **Learned action readout** under **Who is steering?**, with **Autopilot** and **Untrained** available for comparison. Switch them live, or use **Train & inspect flight → Restart round** for a fresh comparison. A pretrained 3D lesson ships with the game; saved flight lessons are preserved on reload. **Erase flight learning** removes its motor outputs; **Train flight readout** learns them again in the browser, and **Restore trained flight** reloads the starter lesson. These controls preserve learned fruit tastes.
 
-Choose **Flight circuit** in the Brain panel to inspect the motor features and applied force; **Taste circuit** shows smell learning. Learning steers the attached knife's XYZ forces and rotation. Perch-to-knife routes remain staged 3D paths. See [GAME_MODEL.md](GAME_MODEL.md) for the distinction and measured results.
+Choose **Flight circuit** in the Brain panel to inspect the motor features and applied force; **Taste circuit** shows smell learning. Learning steers each fly from its shelf to the knife and back, and controls the knife's XYZ forces and rotation. Flies follow spatial waypoints through physical feedback rather than timed animation. Try **Gust of wind** under **Train & inspect flight** to watch them recover. See [GAME_MODEL.md](GAME_MODEL.md) for the distinction and measured results.
 
 ## Play
 
@@ -38,7 +38,7 @@ Drag the scene to orbit, scroll to zoom, and click a fly to inspect its brain. C
 
 The game uses an immutable real connectome extraction (319 neurons, 2,117 edges). Synthetic odors pass through anatomical PN → KC connections; each chef has independent plastic KC → MBON strengths. Starter favorites are acquired through recorded training. Teaching changes eligible connections, which changes volunteering.
 
-The snack-learning rule is an **engineered appetitive extension**; it is not the original aversive PPL1 learning model. The knife has XYZ translation, quaternion rotation, and swept 3D blade contact driven by an engineered motor controller. Flies use authored 3D approach/return paths and ideal grip constraints; food halves and plating use contact-triggered animation. The Brain panel shows live model rates with schematic positions, not measured spikes or soma coordinates. The game makes no claim of improving human neuroplasticity. See [GAME_MODEL.md](GAME_MODEL.md) for equations, assumptions and limits, and [DATA_PROVENANCE.md](DATA_PROVENANCE.md) for data attribution.
+The snack-learning rule is an **engineered appetitive extension**; it is not the original aversive PPL1 learning model. The knife has XYZ translation, quaternion rotation, and swept 3D blade contact driven by an engineered motor controller. Flies use learned force/torque control toward engineered waypoints and ideal grip constraints; food halves and plating use contact-triggered animation. The Brain panel shows live model rates with schematic positions, not measured spikes or soma coordinates. The game makes no claim of improving human neuroplasticity. See [GAME_MODEL.md](GAME_MODEL.md) for equations, assumptions and limits, and [DATA_PROVENANCE.md](DATA_PROVENANCE.md) for data attribution.
 
 The original learned-motor laboratory remains at **/lab.html**, with its Canvas fallback at **/index2d.html**. Its measured benchmarks and model card are unchanged and apply only to that laboratory. See [LAB_README.md](LAB_README.md).
 
@@ -62,7 +62,7 @@ For the original lab: `node scripts/physics-benchmark.mjs` and `npm run experime
 - `src/fruit-memory.js`: odor inputs, anatomical feature circuit and independent plastic strengths.
 - `src/salad-game.js`: recruitment, phase transitions, physical knife contact and scoring.
 - `src/salad-scene.js`: kitchen, flies, knife, fruit halves, camera and visual effects.
-- `src/flight3d.js`: perches, XYZ flight paths, quaternion rigid-body motion and exact carrier attachment.
+- `src/flight3d.js`: perches, physical XYZ navigation, banking targets, quaternion rigid-body motion and exact carrier attachment.
 - `src/brain-panel.js`: rotatable 3D schematic driven by the selected fly's rate-model state.
 - `src/salad-app.js`, `index.html`, `salad.css`: playable interface and brain inspector.
 - `src/physics.js`: preserved planar laboratory simulator and engineering motor controller.

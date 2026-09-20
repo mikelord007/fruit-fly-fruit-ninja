@@ -9,8 +9,8 @@ function advance(g,seconds,cut=true){for(let j=0;j<seconds*120&&g.phase!=='serve
 test('all three complete recipes run with learned force/torque and genuine blade contact',()=>{
  for(const recipe of RECIPES){const memory=createMemory(circuit);teach(memory,[0,4],3,6);const g=createGame(memory,{motorMode:'learned',motorSwarm:deserializeMotorSwarm(circuit,saved)});order(g,recipe);advance(g,60);assert.equal(g.served,1,recipe.name);assert.equal(g.cutCount,recipe.fruits.length);assert.equal(g.events.filter(e=>e.type==='slice').length,recipe.fruits.length);}
 });
-test('erasure stops lifting; fitting again recovers the same active order without changing fruit preferences',()=>{
- const memory=createMemory(circuit),weights=memory.flies.map(f=>[...f.weights]),g=createGame(memory,{motorMode:'learned',motorSwarm:createMotorSwarm(circuit)});order(g,{fruits:[0]});advance(g,8);assert.equal(g.phase,'lift');assert.equal(g.cutCount,0);assert.ok(g.world.y<.4);
+test('erasure stops navigation; fitting again recovers the same active order without changing fruit preferences',()=>{
+ const memory=createMemory(circuit),weights=memory.flies.map(f=>[...f.weights]),g=createGame(memory,{motorMode:'learned',motorSwarm:createMotorSwarm(circuit)});order(g,{fruits:[0]});advance(g,8);assert.equal(g.phase,'recruit');assert.ok(g.crew.every(i=>g.world.flies[i].status==='approach'));assert.equal(g.cutCount,0);assert.ok(g.world.y<.4);
  const trained=trainMotorSwarm(circuit);setMotorMode(g,'learned',trained);advance(g,30);assert.equal(g.served,1);assert.deepEqual(memory.flies.map(f=>f.weights),weights);
 });
 test('switching an airborne trained crew to untrained preserves recruitment and preferences, then autopilot recovers',()=>{

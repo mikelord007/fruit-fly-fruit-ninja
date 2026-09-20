@@ -1,5 +1,5 @@
 import {createMemory,FRUITS,FLY_NAMES,responses,recruit,teach,resetMemory,changedSynapses,VOLUNTEER_THRESHOLD,sniff} from './fruit-memory.js';
-import {createGame,order,stepGame,chop,timing,startRush,refreshCrew,RECIPES,setMotorMode} from './salad-game.js';
+import {createGame,order,stepGame,chop,timing,startRush,refreshCrew,RECIPES,setMotorMode,gust} from './salad-game.js';
 import {createSaladView} from './salad-scene.js';
 import {DT} from './physics.js';
 import {PERCHES} from './flight3d.js';
@@ -57,13 +57,14 @@ function updateUI() {
   $('brainCaption').title=motorView?'Flight inputs and six force/torque outputs are engineered. Glows show absolute PN/KC activity amplified 15×; the MBON is not a motor neuron.':'Glows show taste-circuit rate activity, not measured spikes. Positions are illustrative.';
   if(motorView){
     const flight=motorUI.live(inspect,game);
-    text('brainSignal',game.motorMode==='autopilot'?'Autopilot · circuit idle':game.motorMode==='untrained'?'Untrained · zero output':flyState.enabled?'Learned flight readout':'Waiting for knife duty');
+    text('brainSignal',game.motorMode==='autopilot'?'Autopilot · circuit idle':game.motorMode==='untrained'?'Untrained · zero output':flyState.flight?'Learned navigation':flyState.enabled?'Learned knife control':'Resting on perch');
     text('brainActive',flight.kc.filter(x=>x>.015).length);
-    text('brainOutput',flyState.enabled?Math.hypot(flyState.fx,flyState.fy,flyState.fz).toFixed(2):'0.00');
+    text('brainOutput',flyState.enabled||flyState.flight?Math.hypot(flyState.fx,flyState.fy,flyState.fz).toFixed(2):'0.00');
   }
   text('score',game.score.toLocaleString());text('served',game.served);text('clock',game.rush?Math.ceil(game.remaining):'∞');text('clockLabel',game.rush?'SECONDS LEFT':'FREE PLAY');text('combo',game.combo>1?`${game.combo} CUT STREAK ✦`:'');
   text('mode',game.ended?'SHIFT COMPLETE':game.rush?'RUSH HOUR':'KITCHEN OPEN');
   $('chop').disabled=game.phase!=='ready'||paused;$('timingNeedle').style.left=`${game.phase==='ready'?timing(game)*98:0}%`;
+  $('gust').disabled=paused||game.ended||!game.world.flies.some(f=>f.enabled||f.flight);
   const names=game.crew.map(i=>FLY_NAMES[i]).join(' + '),fruit=FRUITS[game.fruit??0];
   const phaseCopy={idle:['01 / PICK YOUR MIX','What’s on the menu?','Order a bowl to send its fruit fans into action.'],waiting:['02 / A NEW TASTE',`${fruit.name} needs more fans.`,`Teach at least two chefs ${fruit.name.toLowerCase()} in Taste school below.`],recruit:['02 / CALL THE CREW',`${fruit.name} fans, assemble!`,`${names} are reporting for knife duty.`],lift:['03 / LIFT TOGETHER','Tiny chefs. Big knife.','The volunteers are lifting with bounded physical forces.'],ready:['04 / MAKE IT COUNT','Ready, steady… chop!','Hit Space or Chop when the marker enters the green zone.'],cut:['04 / KNIFE IN MOTION','Here comes the chop!','A slice only counts when the moving blade touches fruit.'],plate:['05 / INTO THE BOWL',game.lastQuality,'Freshly sliced and heading to your salad.'],return:['05 / CHANGE OF CREW','Back to the chopping board.','The crew lowers the knife before handing it over.'],served:['06 / ORDER UP!',`${game.recipe?.name??'Salad'} served!`,'Pick another bowl. Your chefs remember what they learned.'],ended:['SHIFT COMPLETE',`${game.served} bowls. ${game.score} points.`,'Play another rush or take your time in free play.']};
   if(lastPhase!==game.phase||lastOrder!==game.orderId){lastPhase=game.phase;lastOrder=game.orderId;const [step,title,hint]=phaseCopy[game.phase];text('stepLabel',step);text('actionTitle',title);text('actionHint',hint);text('crewStatus',['idle','served','ended'].includes(game.phase)?'8 tiny chefs, reporting for duty':game.phase==='waiting'?`${game.crew.length}/2 volunteers · training needed`:`${game.crew.length} volunteers · ${names}`);text('ticketName',game.recipe?.name??'Your order will appear here');
@@ -74,6 +75,7 @@ function updateUI() {
   }
 }
 function init() {
+  $('gust').onclick=()=>{if(gust(game)){feedback('A little turbulence!');updateUI();}};
   $('flyCards').replaceChildren(...FLY_NAMES.map((_,i)=>{const b=document.createElement('button');b.className='fly-card';b.onclick=()=>choose(i);return b;}));
   $('inspectFly').innerHTML=FLY_NAMES.map((name,i)=>`<option value="${i}">${name}</option>`).join('');$('inspectFly').onchange=()=>inspectChef(Number($('inspectFly').value));
   $('brainFly').innerHTML=$('inspectFly').innerHTML;$('brainFly').onchange=()=>inspectChef(Number($('brainFly').value));

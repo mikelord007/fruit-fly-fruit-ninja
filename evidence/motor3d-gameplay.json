@@ -6,7 +6,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 3,
-      "time": 30.799999999998892,
+      "time": 37.31666666666519,
       "maxGripError": 0
     },
     {
@@ -14,7 +14,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 3,
-      "time": 30.891666666665554,
+      "time": 37.1916666666652,
       "maxGripError": 0
     },
     {
@@ -22,7 +22,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 3,
-      "time": 29.549999999998963,
+      "time": 36.624999999998565,
       "maxGripError": 0
     }
   ],
@@ -35,7 +35,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.016666666666739,
+      "time": 12.258333333333278,
       "maxGripError": 0
     },
     {
@@ -46,7 +46,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 9.041666666666794,
+      "time": 11.8583333333333,
       "maxGripError": 0
     },
     {
@@ -57,7 +57,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 9.200000000000118,
+      "time": 12.099999999999953,
       "maxGripError": 0
     },
     {
@@ -68,7 +68,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.150000000000064,
+      "time": 12.308333333333275,
       "maxGripError": 0
     },
     {
@@ -79,7 +79,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.450000000000047,
+      "time": 12.366666666666605,
       "maxGripError": 0
     },
     {
@@ -90,7 +90,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.000000000000073,
+      "time": 12.333333333333274,
       "maxGripError": 0
     },
     {
@@ -101,7 +101,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.058333333333403,
+      "time": 12.32499999999994,
       "maxGripError": 0
     },
     {
@@ -112,7 +112,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.358333333333386,
+      "time": 12.333333333333274,
       "maxGripError": 0
     },
     {
@@ -123,7 +123,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.358333333333386,
+      "time": 12.333333333333274,
       "maxGripError": 0
     },
     {
@@ -134,7 +134,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.358333333333386,
+      "time": 12.333333333333274,
       "maxGripError": 0
     },
     {
@@ -145,7 +145,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.450000000000047,
+      "time": 12.366666666666605,
       "maxGripError": 0
     },
     {
@@ -156,7 +156,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.358333333333386,
+      "time": 12.333333333333274,
       "maxGripError": 0
     },
     {
@@ -167,7 +167,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.358333333333386,
+      "time": 12.333333333333274,
       "maxGripError": 0
     },
     {
@@ -178,7 +178,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 9.200000000000118,
+      "time": 12.099999999999953,
       "maxGripError": 0
     },
     {
@@ -189,7 +189,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.150000000000064,
+      "time": 12.308333333333275,
       "maxGripError": 0
     },
     {
@@ -200,7 +200,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.450000000000047,
+      "time": 12.366666666666605,
       "maxGripError": 0
     },
     {
@@ -211,7 +211,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.000000000000073,
+      "time": 12.333333333333274,
       "maxGripError": 0
     },
     {
@@ -222,7 +222,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.058333333333403,
+      "time": 12.32499999999994,
       "maxGripError": 0
     },
     {
@@ -233,7 +233,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.150000000000064,
+      "time": 12.308333333333275,
       "maxGripError": 0
     },
     {
@@ -244,7 +244,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.450000000000047,
+      "time": 12.366666666666605,
       "maxGripError": 0
     },
     {
@@ -255,7 +255,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.000000000000073,
+      "time": 12.333333333333274,
       "maxGripError": 0
     },
     {
@@ -266,7 +266,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.058333333333403,
+      "time": 12.32499999999994,
       "maxGripError": 0
     },
     {
@@ -277,7 +277,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.450000000000047,
+      "time": 12.391666666666604,
       "maxGripError": 0
     },
     {
@@ -288,7 +288,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.450000000000047,
+      "time": 12.391666666666604,
       "maxGripError": 0
     },
     {
@@ -299,7 +299,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.450000000000047,
+      "time": 12.391666666666604,
       "maxGripError": 0
     },
     {
@@ -310,7 +310,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.450000000000047,
+      "time": 12.4416666666666,
       "maxGripError": 0
     },
     {
@@ -321,7 +321,7 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.450000000000047,
+      "time": 12.4416666666666,
       "maxGripError": 0
     },
     {
@@ -332,20 +332,20 @@
       "phase": "served",
       "served": 1,
       "cuts": 1,
-      "time": 10.450000000000047,
+      "time": 12.424999999999935,
       "maxGripError": 0
     }
   ],
   "controls": {
     "untrained": {
-      "phase": "lift",
+      "phase": "recruit",
       "served": 0,
       "cuts": 0,
       "time": 10.000000000000073,
       "maxGripError": 0
     },
     "resetReadout": {
-      "phase": "lift",
+      "phase": "recruit",
       "served": 0,
       "cuts": 0,
       "time": 10.000000000000073,

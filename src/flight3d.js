@@ -15,6 +15,15 @@ const v=p=>new Vector3(p.x,p.y,p.z??0);
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 export function yawQuaternion(yaw=0) {return new Quaternion().setFromAxisAngle(new Vector3(0,1,0),yaw);}
 export function poseQuaternion(pose) {return pose.orientation?new Quaternion().copy(pose.orientation):new Quaternion().setFromAxisAngle(new Vector3(0,0,1),pose.angle??0);}
+// Bank into acceleration and lean back to brake. This is a desired attitude;
+// actual rotation still comes only from the controller's torque and inertia.
+export function targetQuaternion(world) {
+  const q=yawQuaternion(world.target.yaw);
+  if(!world.banking)return q;
+  const acceleration=new Vector3(5.3*(world.target.x-world.x)-3.8*world.vx,0,5.3*(world.target.z-world.z)-3.8*world.vz).applyQuaternion(q.clone().invert());
+  return q.multiply(new Quaternion().setFromAxisAngle(new Vector3(1,0,0),clamp(acceleration.z*.13,-.6,.6)))
+    .multiply(new Quaternion().setFromAxisAngle(new Vector3(0,0,1),clamp(-acceleration.x*.13,-.6,.6)));
+}
 export function transformPoint(world,point) {return v(point).applyQuaternion(poseQuaternion(world)).add(v(world));}
 export function gripPoint(fly) {return {x:fly.attachment,y:.34,z:fly.gripZ};}
 export function createFlightWorld() {
@@ -30,7 +39,7 @@ export function teacherMotorActions(world,{bounded=true}={}) {
     9.81+6.5*(world.target.y-world.y)-4.2*world.vy,
     5.3*(world.target.z-world.z)-3.8*world.vz,
   ).multiplyScalar(world.mass);
-  const error=yawQuaternion(world.target.yaw).multiply(poseQuaternion(world).invert());
+  const error=targetQuaternion(world).multiply(poseQuaternion(world).invert());
   const sign=error.w<0?-1:1;
   const desiredTorque=new Vector3(error.x,error.y,error.z).multiplyScalar(30*sign)
     .addScaledVector(world.angularVelocity,-7).multiplyScalar(world.inertia);
@@ -45,6 +54,7 @@ export function stepKnife(world,dt,actions) {
   const commands=actions??teacherMotorActions(world);
   const totalForce=new Vector3(0,-9.81*world.mass,0),totalTorque=new Vector3();
   for(const fly of world.flies) {
+    if(!fly.enabled)continue;
     const a=commands[fly.index]??{},finite=x=>Number.isFinite(x)?x:0;
     const force=fly.enabled?new Vector3(finite(a.fx),finite(a.fy),finite(a.fz)).clampLength(0,8):new Vector3();
     const torque=fly.enabled?new Vector3(finite(a.tx),finite(a.ty),finite(a.tz)).clampLength(0,.9):new Vector3();
@@ -72,15 +82,17 @@ export function stepKnife(world,dt,actions) {
 }
 export function knifeSettled(world,positionTolerance=.12,speedTolerance=.25) {
   const orientationError=1-Math.abs(world.orientation.dot(yawQuaternion(world.target.yaw)));
-  return v(world).distanceTo(v(world.target))<positionTolerance&&Math.hypot(world.vx,world.vy,world.vz)<speedTolerance&&orientationError<.002&&world.angularVelocity.length()<.18;
+  return v(world).distanceTo(v(world.target))<positionTolerance&&Math.hypot(world.vx,world.vy,world.vz)<speedTolerance&&orientationError<.001&&world.angularVelocity.length()<.18;
 }
 function launch(fly,end,endOrientation,status,index) {
-  const start=fly.position.clone(),distance=start.distanceTo(end);
-  const lateral=(index%2?1:-1)*.4;
-  fly.flight={start,end:end.clone(),fromQ:fly.orientation.clone(),toQ:endOrientation.clone(),
-    c1:start.clone().add(new Vector3(lateral,.7,.85)),
-    c2:end.clone().add(new Vector3(-lateral,.8,.65)),
-    elapsed:0,duration:clamp(distance/3.8+.6,.8,2.8)};
+  const start=fly.position.clone();
+  // Spatial waypoints clear the shelf and approach the grip from above. They
+  // choose destinations, never positions, velocities or timed trajectories.
+  const departure=start.clone().add(new Vector3(0,.4,.8));
+  const arrival=end.clone().add(new Vector3(0,.65,.8));
+  fly.flight={end:end.clone(),toQ:endOrientation.clone(),waypoints:[departure,arrival,end.clone()],leg:0,
+    body:{x:start.x,y:start.y,z:start.z,vx:0,vy:0,vz:0,mass:.12,inertia:.008,orientation:fly.orientation,
+      angularVelocity:new Vector3(),target:{},banking:true,flies:[{enabled:true}]}};
   fly.status=status;fly.enabled=false;
 }
 export function dispatchCrew(world,crew) {
@@ -98,20 +110,34 @@ export function dispatchCrew(world,crew) {
     }
   });
 }
-export function stepFlyMotion(world,dt) {
+export function stepFlyMotion(world,dt,controller=body=>teacherMotorActions(body)[0]) {
   for(const fly of world.flies) {
     if(fly.status==='attached') {
       fly.position.copy(transformPoint(world,gripPoint(fly)));fly.orientation.copy(world.orientation);continue;
     }
     if(!fly.flight||dt===0)continue;
-    const f=fly.flight;f.elapsed=Math.min(f.duration,f.elapsed+dt);
-    const u=f.elapsed/f.duration,t=u*u*(3-2*u),s=1-t;
-    const before=fly.position.clone();
-    fly.position.copy(f.start).multiplyScalar(s**3).addScaledVector(f.c1,3*s*s*t).addScaledVector(f.c2,3*s*t*t).addScaledVector(f.end,t**3);
-    const velocity=fly.position.clone().sub(before),yaw=Math.atan2(velocity.z,-velocity.x);
-    const flightQ=yawQuaternion(yaw).multiply(new Quaternion().setFromAxisAngle(new Vector3(0,0,1),clamp(-Math.atan2(velocity.y,Math.hypot(velocity.x,velocity.z)),-.45,.45)));
-    fly.orientation.copy(f.fromQ).slerp(flightQ,Math.min(1,u*5)).slerp(f.toQ,clamp((u-.75)/.25,0,1));
-    if(u>=1){fly.position.copy(f.end);fly.orientation.copy(f.toQ);fly.status=fly.status==='approach'?'attached':'perched';fly.flight=null;}
+    const f=fly.flight,b=f.body;
+    // Re-read physical position so a disturbance changes the next action.
+    Object.assign(b,{x:fly.position.x,y:fly.position.y,z:fly.position.z});
+    if(f.leg<f.waypoints.length-1&&fly.position.distanceTo(f.waypoints[f.leg])<.48)f.leg++;
+    const target=f.waypoints[f.leg],delta=target.clone().sub(fly.position);
+    const docking=f.leg===f.waypoints.length-1;
+    b.target={...target,yaw:docking?2*Math.atan2(f.toQ.y,f.toQ.w):Math.atan2(delta.z,-delta.x)};
+    const a=controller(b,fly.index)??{},finite=x=>Number.isFinite(x)?x:0;
+    const force=new Vector3(finite(a.fx),finite(a.fy),finite(a.fz)).clampLength(0,8);
+    const torque=new Vector3(finite(a.tx),finite(a.ty),finite(a.tz)).clampLength(0,.9);
+    fly.fx=force.x;fly.fy=force.y;fly.fz=force.z;fly.torque.copy(torque);
+    b.vx+=(force.x/b.mass-.25*b.vx)*dt;b.vy+=(force.y/b.mass-9.81-.25*b.vy)*dt;b.vz+=(force.z/b.mass-.25*b.vz)*dt;
+    fly.position.addScaledVector(new Vector3(b.vx,b.vy,b.vz),dt);
+    b.angularVelocity.addScaledVector(torque,dt/b.inertia);
+    const speed=b.angularVelocity.length();
+    if(speed>1e-10)fly.orientation.premultiply(new Quaternion().setFromAxisAngle(b.angularVelocity.clone().divideScalar(speed),speed*dt)).normalize();
+    // Worktop contact prevents a zero-output fly from falling out of the room.
+    if(fly.position.y<.18){fly.position.y=.18;b.vy=Math.max(0,-b.vy*.1);}
+    if(docking&&fly.position.distanceTo(f.end)<.07&&Math.hypot(b.vx,b.vy,b.vz)<.2&&fly.orientation.angleTo(f.toQ)<.12){
+      fly.position.copy(f.end);fly.orientation.copy(f.toQ);fly.status=fly.status==='approach'?'attached':'perched';fly.flight=null;
+      fly.fx=fly.fy=fly.fz=0;fly.torque.set(0,0,0);
+    }
   }
 }
 export function crewAttached(world,crew) {return crew.length>=2&&crew.every(i=>world.flies[i].status==='attached');}

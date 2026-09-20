@@ -1,7 +1,7 @@
 import {createMotorSwarm,serializeMotorSwarm,deserializeMotorSwarm} from './motor3d.js';
 const $=id=>document.getElementById(id);
 const KEY='fruit-fly-motor3d-v1';
-const COPY={autopilot:'Engineering reference: bounded forces and rotation.',learned:'Trained PN → KC readout steers the knife in XYZ.',untrained:'Zero motor output. Fruit preferences stay intact.'};
+const COPY={autopilot:'Reference controller steers each fly and the knife.',learned:'Learned steering from shelf to knife, and back.',untrained:'No thrust: flies cannot navigate or lift the knife.'};
 export async function createMotorUI(circuit,memory,{onChange,onRestart}) {
   const state={mode:'learned',swarm:createMotorSwarm(circuit)};
   let shipped=null,worker=null;
@@ -60,7 +60,8 @@ export async function createMotorUI(circuit,memory,{onChange,onRestart}) {
     }catch{status('This browser could not start flight training. You can still restore the starter lesson.');finish();}
   };
   function live(index,game){
-    if(state.mode==='autopilot'||!game.world.flies[index].enabled||['idle','served','waiting','ended','recruit'].includes(game.phase))return resting;
+    const fly=game.world.flies[index];
+    if(state.mode==='autopilot'||(!fly.enabled&&!fly.flight)||game.ended)return resting;
     const a=state.swarm.agents[index];
     return {pn:pnOrder.map(i=>Math.min(1,Math.abs(a.lastPNActivity[i])*15)),kc:kcOrder.map(i=>Math.min(1,Math.abs(a.lastActivity[i])*15))};
   }
@@ -69,7 +70,7 @@ export async function createMotorUI(circuit,memory,{onChange,onRestart}) {
     const zero=state.mode==='untrained'||agent.readout.every(row=>row.every(w=>w===0));
     $('motorHint').textContent=state.mode==='learned'&&zero?'Flight weights are zero. Train or restore a flight lesson.':COPY[state.mode];
     if($('motorReadout').parentElement.parentElement.open){
-      const force=fly.enabled?Math.hypot(fly.fx,fly.fy,fly.fz):0,torque=fly.enabled?fly.torque.length():0;
+      const force=fly.enabled||fly.flight?Math.hypot(fly.fx,fly.fy,fly.fz):0,torque=fly.enabled||fly.flight?fly.torque.length():0;
       const changed=state.mode==='untrained'?0:agent.readout.reduce((sum,row)=>sum+row.filter(w=>Math.abs(w)>1e-7).length,0);
       $('motorReadout').textContent=`${memory.flies[index].name} · force ${force.toFixed(2)} / 8 · torque ${torque.toFixed(2)} / 0.9 · ${changed} flight weights${state.mode==='autopilot'?' (readout idle)':''}`;
     }

@@ -1,7 +1,7 @@
 import {DT} from './physics.js';
 import {KNIFE_HOME,createFlightWorld,dispatchCrew,stepFlyMotion,stepKnife,knifeSettled,crewAttached,poseQuaternion,transformPoint} from './flight3d.js';
 import {recruit,FRUITS,stepNeuralActivity} from './fruit-memory.js';
-import {motorActions} from './motor3d.js';
+import {motorActions,freeFlightAction} from './motor3d.js';
 export const MOTOR_MODES=['autopilot','learned','untrained'];
 export const RECIPES = [
   {name:'Sunshine bowl',subtitle:'The crowd pleaser',fruits:[0,1,2]},
@@ -33,6 +33,16 @@ export function order(g,recipe) {
   g.recipe={...recipe,fruits:[...recipe.fruits]};g.index=0;g.pieces=[];g.orderId++;prepare(g);return true;
 }
 export function refreshCrew(g) {if(g.phase==='waiting') prepare(g);}
+export function gust(g) {
+  if(g.ended)return false;
+  let affected=false;
+  for(const f of g.world.flies)if(f.flight){f.flight.body.vx+=1.7;f.flight.body.vz+=1.2;f.flight.body.angularVelocity.z+=1.3;affected=true;}
+  if(g.world.flies.some(f=>f.enabled)){
+    g.world.vx+=1.1;g.world.vz+=.7;g.world.angularVelocity.z+=.8;affected=true;
+    if(g.phase==='ready'){g.readyTime=0;phase(g,'lift');}
+  }
+  return affected;
+}
 export function timing(g) {return (Math.sin(g.readyTime*3.1-Math.PI/2)+1)/2;}
 export function chop(g) {
   if(g.phase!=='ready') return false;
@@ -58,12 +68,13 @@ export function startRush(g) {if(!['idle','served','ended'].includes(g.phase)) r
 export function stepGame(g,dt=DT) {
   if(g.ended) return;
   g.time+=dt;g.phaseTime+=dt;
-  stepFlyMotion(g.world,dt);
+  stepFlyMotion(g.world,dt,(body,index)=>freeFlightAction(g.motorSwarm,body,index,g.motorMode));
   stepNeuralActivity(g.memory,['idle','served','ended','return'].includes(g.phase)?null:g.fruit,dt);
   if(g.rush) {g.remaining=Math.max(0,g.remaining-dt);if(!g.remaining){g.ended=true;phase(g,'ended');emit(g,'ended');return;}}
   if(['idle','served','waiting'].includes(g.phase)) return;
   if(g.phase==='recruit') {if(crewAttached(g.world,g.crew)){g.world.flies.forEach(f=>f.enabled=g.crew.includes(f.index));g.world.target={x:0,y:1.85,z:0,yaw:0};phase(g,'lift');}else return;}
   const before={x:g.world.x,y:g.world.y,z:g.world.z,orientation:g.world.orientation.clone()};
+  g.world.banking=['lift','return'].includes(g.phase);
   const actions=g.motorMode==='autopilot'?undefined:motorActions(g.motorSwarm,g.world,g.motorMode);
   stepKnife(g.world,dt,actions);stepFlyMotion(g.world,0);
   if(g.phase==='lift'&&knifeSettled(g.world)) {phase(g,'ready');emit(g,'ready');}

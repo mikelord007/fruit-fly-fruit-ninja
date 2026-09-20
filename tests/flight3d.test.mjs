@@ -32,7 +32,7 @@ test('carrier positions have zero relative drift through pickup, turn, cut and r
     for(const f of g.world.flies)if(f.status==='attached'){assert.ok(f.position.distanceTo(transformPoint(g.world,gripPoint(f)))<1e-10);attachedSteps++;}
   }
   assert.ok(attachedSteps>500);assert.equal(g.phase,'served');
-  for(let i=0;i<400;i++)stepGame(g,dt);assert.ok(g.world.flies.every(f=>f.status==='perched'));
+  for(let i=0;i<1200;i++)stepGame(g,dt);assert.ok(g.world.flies.every(f=>f.status==='perched'));
 });
 test('renderer shares the knife parent transform without interpolation lag',()=>{
   const g=createGame(createMemory(raw));order(g,{fruits:[0]});const scene=new Scene(),rig=new Group(),meshes=g.world.flies.map(()=>new Group());scene.add(rig);

@@ -74,6 +74,12 @@ export function createSaladView(canvas,{onSelect,onError}={}) {
   const bowlBits=[];for(let i=0;i<12;i++){const bit=shape(new THREE.IcosahedronGeometry(.18,1),FRUITS[i%4].hex);bit.visible=false;scene.add(bit);bowlBits.push(bit);}
   const confetti=[];for(let i=0;i<34;i++){const bit=shape(new THREE.BoxGeometry(.055,.09,.035),[0xf2b648,0xe36b59,0x77a666,0xffeed0][i%4]);bit.visible=false;scene.add(bit);confetti.push(bit);}
   const badges=flies.map((_,i)=>{const badge=shape(new THREE.SphereGeometry(.055,10,8),0xffffff);flies[i].add(badge);badge.position.set(.14,.1,.12);return {badge};});
+  const trails=flies.map(()=>{
+    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array(36*3),3));geometry.setDrawRange(0,0);
+    const line=new THREE.Line(geometry,new THREE.LineBasicMaterial({color:0x6c9578,transparent:true,opacity:.38}));scene.add(line);
+    return {line,points:[],last:-1};
+  });
+  let previousWorld=null;
   const camera=new THREE.PerspectiveCamera(40,1,.1,60);
   const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.enablePan=false;controls.minDistance=7;controls.maxDistance=19;controls.minPolarAngle=.45;controls.maxPolarAngle=1.54;controls.minAzimuthAngle=-1.05;controls.maxAzimuthAngle=1.05;
   function resetCamera(){camera.position.set(5.8,5.1,12.5);controls.target.set(0,2.45,-1);controls.update();}resetCamera();
@@ -85,6 +91,7 @@ export function createSaladView(canvas,{onSelect,onError}={}) {
     const width=canvas.clientWidth,height=canvas.clientHeight,ratio=Math.min(devicePixelRatio||1,2);
     if(canvas.width!==Math.floor(width*ratio)||canvas.height!==Math.floor(height*ratio)){renderer.setSize(width,height,false);camera.aspect=width/height;camera.fov=Math.min(67,2*Math.atan(Math.tan(THREE.MathUtils.degToRad(40/2))*Math.max(1,1.45/camera.aspect))*180/Math.PI);camera.updateProjectionMatrix();}
     const t=g.time;
+    if(previousWorld!==g.world){for(const trail of trails){trail.points=[];trail.last=-1;}previousWorld=g.world;}
     syncFlyTransforms(beamRig,scene,flies,g.world);
     flies.forEach((fly,i)=>{
       const state=g.world.flies[i],active=state.status==='attached',local=gripPoint(state);
@@ -96,6 +103,15 @@ export function createSaladView(canvas,{onSelect,onError}={}) {
       }
       fly.scale.setScalar(1.12);
       fly.userData.wings.forEach((w,n)=>w.rotation.x=(n?1:-1)*(.55+(state.status==='perched'?0:Math.sin(t*65+i)*.6)));
+      const trail=trails[i];
+      if(state.flight&&t-trail.last>.03){trail.points.push(state.position.clone());if(trail.points.length>36)trail.points.shift();trail.last=t;}
+      if(!state.flight)trail.points=[];
+      const positions=trail.line.geometry.attributes.position;
+      trail.points.forEach((p,j)=>positions.setXYZ(j,p.x,p.y,p.z));positions.needsUpdate=true;
+      trail.line.geometry.setDrawRange(0,trail.points.length);trail.line.visible=trail.points.length>1;
+      const force=new THREE.Vector3(state.fx,state.fy,state.fz),magnitude=force.length(),arrow=forceArrows[i];
+      arrow.visible=i===inspected&&(state.enabled||state.flight)&&magnitude>.05;
+      if(arrow.visible){arrow.position.copy(state.position);arrow.setDirection(force.normalize());arrow.setLength(Math.min(.85,.18+magnitude*.15),.12,.065);}
       highlights[i].visible=i===inspected;
       const rs=responses(g.memory,i),best=rs.indexOf(Math.max(...rs));badges[i].badge.material.color.set(rs[best]>=.72?FRUITS[best].hex:0xc0b9a1);
     });
@@ -109,5 +125,5 @@ export function createSaladView(canvas,{onSelect,onError}={}) {
     confetti.forEach((bit,i)=>{const age=g.cutAt===null?10:t-g.cutAt;bit.visible=age<1.05;if(bit.visible){const a=i*2.4,speed=.8+(i%5)*.3;bit.position.set(Math.cos(a)*speed*age,.6+(2+i%3*.4)*age-3*age*age,Math.sin(a)*speed*age);bit.rotation.set(age*4,age*6,i);}});
     controls.update();renderer.render(scene,camera);
   }
-  return {render,resetCamera,dispose(){controls.dispose();renderer.dispose();}};
+  return {render,resetCamera,dispose(){for(const {line} of trails){line.geometry.dispose();line.material.dispose();}controls.dispose();renderer.dispose();}};
 }
