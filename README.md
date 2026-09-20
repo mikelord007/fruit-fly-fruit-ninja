@@ -12,7 +12,7 @@ Brand assets, image-generation prompts, and search/social metadata notes: [BRAND
 
 The kitchen starts with **Learned action readout** under **Who is steering?**, with **Autopilot** and **Untrained** available for comparison. Switch them live, or use **Train & inspect flight → Restart round** for a fresh comparison. A pretrained 3D lesson ships with the game; saved flight lessons are preserved on reload. **Erase flight learning** removes its motor outputs; **Train flight readout** learns them again in the browser, and **Restore trained flight** reloads the starter lesson. These controls preserve learned fruit smell preferences.
 
-Choose **Flight circuit** in the Brain panel to inspect the motor features and applied force; **Smell circuit** shows smell learning. Learning steers each fly from its shelf to the knife and back, and controls the knife's XYZ forces and rotation. Flies follow spatial waypoints through physical feedback rather than timed animation. Try **Gust of wind** under **Train & inspect flight** to watch them recover. See [GAME_MODEL.md](GAME_MODEL.md) for the distinction and measured results.
+Choose **Flight circuit** in the Brain panel to inspect the motor features and applied force; **Smell circuit** shows smell learning. Learning steers each fly from its shelf to the knife and back, and controls the knife's XYZ forces and rotation. Flies follow spatial waypoints through physical feedback rather than timed animation. Try the **wind icon** in the kitchen’s top toolbar to watch them recover. See [GAME_MODEL.md](GAME_MODEL.md) for the distinction and measured results.
 
 ## Play
 

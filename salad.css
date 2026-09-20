@@ -94,6 +94,8 @@
 @media(max-width:760px){.logo{gap:7px}.logo-icon{width:42px;height:42px}.about-game{font-size:11px}}
 @media(max-width:380px){.logo{font-size:20px;gap:5px}.logo-icon{width:34px;height:34px}.header{gap:10px}.header-actions{gap:5px}}
 
+.wind-control{display:grid;place-items:center;width:36px;height:32px;padding:5px;flex-shrink:0}
+.wind-control svg{display:block;pointer-events:none}
 .stage-tools{display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap;pointer-events:auto}
 .stage-top{gap:10px;align-items:flex-start;z-index:2}
 .open-sign{flex-shrink:0}

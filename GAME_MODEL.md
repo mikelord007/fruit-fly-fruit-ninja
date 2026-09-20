@@ -40,7 +40,7 @@ Validated flight readouts, including deliberate erasure, persist in browser stor
 
 The selected motor policy controls both perch travel and the attached knife. During free flight, each fly runs its own observation through its own readout; while attached, carriers share the knife-body observation. The coordinator chooses waypoints, grips and desired banking attitude. Position error and velocity determine the bank target (capped at 0.6 radians per bank axis), but only integrated motor torque rotates the body. The knife banks during lifting and return, then levels for a cut. This makes acceleration, braking and recovery visible without decorative wobble. Zero or erased outputs cannot navigate to the knife; gravity still acts and the worktop supplies a floor contact. Restoring/training the lesson recovers the same active order.
 
-**Gust of wind** in Train & inspect flight applies a physical velocity/angular-velocity impulse to flying chefs and the carried knife. The learned controller must correct it. Short trails record actual fly positions during free flight and attached knife carrying, and an arrow on the inspected active chef shows its applied force; neither changes motion.
+The **wind icon** in the kitchen’s top toolbar applies a physical velocity/angular-velocity impulse to flying chefs and the carried knife. The learned controller must correct it. Short trails record actual fly positions during free flight and attached knife carrying, and an arrow on the inspected active chef shows its applied force; neither changes motion.
 
 ## Live Brain panel
 
