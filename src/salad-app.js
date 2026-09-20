@@ -1,10 +1,12 @@
-import {createMemory,FRUITS,FLY_NAMES,responses,recruit,teach,resetMemory,changedSynapses,VOLUNTEER_THRESHOLD} from './fruit-memory.js';
+import {createMemory,FRUITS,FLY_NAMES,responses,recruit,teach,resetMemory,changedSynapses,VOLUNTEER_THRESHOLD,sniff} from './fruit-memory.js';
 import {createGame,order,stepGame,chop,timing,startRush,refreshCrew,RECIPES} from './salad-game.js';
 import {createSaladView} from './salad-scene.js';
 import {DT} from './physics.js';
+import {PERCHES} from './flight3d.js';
+import {createBrainPanel} from './brain-panel.js';
 const $=id=>document.getElementById(id);
 const text=(id,value)=>{if($(id).textContent!==String(value))$(id).textContent=String(value);};
-let memory,game,view,selected=new Set([0,4]),inspect=0,custom=new Set([0,1,2]),sound=false,audioContext=null,paused=false;
+let memory,game,view,brainPanel,selected=new Set([0,4]),inspect=0,custom=new Set([0,1,2]),sound=false,audioContext=null,paused=false;
 let accumulator=0,last=performance.now(),uiTick=0,lastPhase='',lastOrder=-1;
 const idle=()=>['idle','served'].includes(game.phase)&&!game.ended;
 function beep(kind) {
@@ -27,7 +29,8 @@ function drawBrain() {
   active.forEach(({v,i},n)=>{const y=42+n*13;c.beginPath();c.moveTo(90,132);c.lineTo(210,y);c.strokeStyle='#b9c8a9';c.lineWidth=1;c.stroke();c.beginPath();c.moveTo(210,y);c.lineTo(520,132);c.strokeStyle=FRUITS[fruit].color;c.globalAlpha=.25+.6*fly.weights[i]/(memory.initial[i]*1.5);c.lineWidth=.5+2.8*fly.weights[i]/memory.initial[i];c.stroke();c.globalAlpha=1;c.beginPath();c.arc(210,y,3+v*2,0,Math.PI*2);c.fillStyle='#62865a';c.fill();});
   for(const [x,r,color] of [[90,18,FRUITS[fruit].color],[520,22,'#315c49']]){c.beginPath();c.arc(x,132,r,0,Math.PI*2);c.fillStyle=color;c.fill();}c.font='11px system-ui';c.fillStyle='#839175';c.fillText('Real PN → KC contacts',12,243);c.fillText('Line width = simulated KC → MBON strength',280,243);
 }
-function choose(index) {selected.has(index)?selected.delete(index):selected.add(index);inspect=index;$('inspectFly').value=String(index);memoryUI();}
+function inspectChef(index) {inspect=index;$('inspectFly').value=String(index);$('brainFly').value=String(index);drawBrain();}
+function choose(index) {selected.has(index)?selected.delete(index):selected.add(index);inspectChef(index);memoryUI();}
 function makeOrder(recipe) {if(order(game,recipe)){lastPhase='';lastOrder=-1;$('kitchenCanvas').focus({preventScroll:true});beep('order');text('liveStatus',`${recipe.name} ordered. ${FRUITS[game.fruit].name} fans, report to the knife.`);updateUI();}}
 function eventUI(event) {
   if(event.type==='slice'){feedback(event.quality);beep('slice');text('liveStatus',`${event.quality} ${FRUITS[game.fruit].name} sliced by blade contact.`);}
@@ -36,6 +39,11 @@ function eventUI(event) {
   if(event.type==='ended'){beep('served');feedback('TIME’S UP!');try{const best=Number(localStorage.getItem('fruit-fly-best-v1'))||0;localStorage.setItem('fruit-fly-best-v1',String(Math.max(best,game.score)));}catch{}}
 }
 function updateUI() {
+  const live=memory.flies[inspect].live,flyState=game.world.flies[inspect];
+  text('brainSignal',live.fruit===null?'No scent · resting':`${FRUITS[live.fruit].name} scent`);
+  text('brainActive',`${live.kc.filter(x=>x>.08).length}`);text('brainOutput',live.mbon.toFixed(2));
+  text('brainLocation',flyState.status==='perched'?PERCHES[inspect].name:{approach:'Flying to the knife',attached:'Holding the knife',returning:'Returning to perch'}[flyState.status]);
+  text('sniff',`Sniff ${FRUITS[game.fruit??Number($('trainingFruit').value)].name.toLowerCase()}`);
   text('score',game.score.toLocaleString());text('served',game.served);text('clock',game.rush?Math.ceil(game.remaining):'∞');text('clockLabel',game.rush?'SECONDS LEFT':'FREE PLAY');text('combo',game.combo>1?`${game.combo} CUT STREAK ✦`:'');
   text('mode',game.ended?'SHIFT COMPLETE':game.rush?'RUSH HOUR':'KITCHEN OPEN');
   $('chop').disabled=game.phase!=='ready'||paused;$('timingNeedle').style.left=`${game.phase==='ready'?timing(game)*98:0}%`;
@@ -50,7 +58,9 @@ function updateUI() {
 }
 function init() {
   $('flyCards').replaceChildren(...FLY_NAMES.map((_,i)=>{const b=document.createElement('button');b.className='fly-card';b.onclick=()=>choose(i);return b;}));
-  $('inspectFly').innerHTML=FLY_NAMES.map((name,i)=>`<option value="${i}">${name}</option>`).join('');$('inspectFly').onchange=()=>{inspect=Number($('inspectFly').value);drawBrain();};
+  $('inspectFly').innerHTML=FLY_NAMES.map((name,i)=>`<option value="${i}">${name}</option>`).join('');$('inspectFly').onchange=()=>inspectChef(Number($('inspectFly').value));
+  $('brainFly').innerHTML=$('inspectFly').innerHTML;$('brainFly').onchange=()=>inspectChef(Number($('brainFly').value));
+  $('sniff').onclick=()=>sniff(memory,inspect,game.fruit??Number($('trainingFruit').value));
   $('recipes').replaceChildren(...RECIPES.map((recipe,i)=>{const b=document.createElement('button');b.className='recipe';b.setAttribute('aria-label',`Order ${recipe.name}: ${recipe.fruits.map(f=>FRUITS[f].name).join(', ')}`);b.innerHTML=`<span class="emoji-row">${recipe.fruits.map(f=>FRUITS[f].emoji).join('')}</span><span class="recipe-name">${recipe.name}</span><span class="recipe-note">${recipe.subtitle}</span><span class="arrow">↗</span>`;b.onclick=()=>makeOrder(recipe);return b;}));
   $('customFruits').replaceChildren(...FRUITS.map((f,i)=>{const b=document.createElement('button');b.textContent=f.emoji;b.setAttribute('aria-label',f.name);b.setAttribute('aria-pressed',String(custom.has(i)));b.onclick=()=>{custom.has(i)?custom.delete(i):custom.add(i);b.setAttribute('aria-pressed',String(custom.has(i)));$('customOrder').disabled=!idle()||!custom.size;};return b;}));
   $('customOrder').onclick=()=>makeOrder({name:'Chef’s special',fruits:[...custom]});
@@ -70,7 +80,7 @@ function init() {
 }
 function frame(now) {
   const elapsed=Math.min(.1,(now-last)/1000);last=now;
-  if(!paused){accumulator+=elapsed;while(accumulator>=DT){stepGame(game,DT);accumulator-=DT;}for(const e of game.events.splice(0))eventUI(e);view.render(game,selected);uiTick+=elapsed;if(uiTick>.04){updateUI();uiTick=0;}}
+  if(!paused){accumulator+=elapsed;while(accumulator>=DT){stepGame(game,DT);accumulator-=DT;}for(const e of game.events.splice(0))eventUI(e);view.render(game,selected,inspect);brainPanel.render(inspect,game.time);uiTick+=elapsed;if(uiTick>.04){updateUI();uiTick=0;}}
   requestAnimationFrame(frame);
 }
-try {const response=await fetch('./data/circuit.json');if(!response.ok)throw new Error('Circuit data could not be loaded.');memory=createMemory(await response.json());game=createGame(memory);view=createSaladView($('kitchenCanvas'),{onSelect:choose,onError:message=>{$('graphicsError').hidden=false;text('graphicsError',message);}});init();requestAnimationFrame(frame);}catch(error){$('graphicsError').hidden=false;text('graphicsError',`Kitchen could not start: ${error.message}. Open the original physics lab below, or reload with WebGL enabled.`);console.error(error);}
+try {const response=await fetch('./data/circuit.json');if(!response.ok)throw new Error('Circuit data could not be loaded.');memory=createMemory(await response.json());game=createGame(memory);view=createSaladView($('kitchenCanvas'),{onSelect:inspectChef,onError:message=>{$('graphicsError').hidden=false;text('graphicsError',message);}});brainPanel=createBrainPanel($('neuralScope'),memory);init();requestAnimationFrame(frame);}catch(error){$('graphicsError').hidden=false;text('graphicsError',`Kitchen could not start: ${error.message}. Open the original physics lab below, or reload with WebGL enabled.`);console.error(error);}

@@ -1,6 +1,6 @@
 {
-  "schema": 1,
-  "description": "Deterministic software simulation; no biological validation. Perfect timing input is supplied programmatically.",
+  "schema": 2,
+  "description": "XYZ/quaternion knife and 3D perch flights; deterministic software simulation, not biological validation. Perfect timing input is supplied programmatically.",
   "starterResponses": [
     {
       "name": "Pip",
@@ -84,24 +84,26 @@
     {
       "name": "Sunshine bowl",
       "phase": "served",
-      "seconds": 26.39166666666581,
+      "seconds": 30.799999999998892,
       "cuts": 3,
       "score": 680,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 5.6833333333334055,
           "quality": "PERFECT!"
         },
         {
           "type": "slice",
-          "time": 13.216666666666557,
+          "time": 16.041666666666398,
           "quality": "PERFECT!"
         },
         {
           "type": "slice",
-          "time": 22.016666666666058,
+          "time": 26.491666666665804,
           "quality": "PERFECT!"
         }
       ],
@@ -118,7 +120,7 @@
         },
         {
           "type": "recruit",
-          "time": 8.791666666666808,
+          "time": 9.99166666666674,
           "fruit": 1,
           "crew": [
             1,
@@ -128,7 +130,7 @@
         },
         {
           "type": "recruit",
-          "time": 17.59166666666631,
+          "time": 20.349999999999486,
           "fruit": 2,
           "crew": [
             2,
@@ -140,24 +142,26 @@
     {
       "name": "Berry besties",
       "phase": "served",
-      "seconds": 26.39166666666581,
+      "seconds": 30.891666666665554,
       "cuts": 3,
       "score": 680,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.141666666666762,
           "quality": "PERFECT!"
         },
         {
           "type": "slice",
-          "time": 13.216666666666557,
+          "time": 16.13333333333306,
           "quality": "PERFECT!"
         },
         {
           "type": "slice",
-          "time": 22.016666666666058,
+          "time": 26.583333333332465,
           "quality": "PERFECT!"
         }
       ],
@@ -173,7 +177,7 @@
         },
         {
           "type": "recruit",
-          "time": 8.791666666666808,
+          "time": 10.450000000000047,
           "fruit": 0,
           "crew": [
             0,
@@ -183,7 +187,7 @@
         },
         {
           "type": "recruit",
-          "time": 17.59166666666631,
+          "time": 20.441666666666148,
           "fruit": 2,
           "crew": [
             2,
@@ -195,24 +199,26 @@
     {
       "name": "Green surprise",
       "phase": "served",
-      "seconds": 26.39166666666581,
+      "seconds": 29.549999999998963,
       "cuts": 3,
       "score": 680,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 5.841666666666747,
           "quality": "PERFECT!"
         },
         {
           "type": "slice",
-          "time": 13.216666666666557,
+          "time": 16.199999999999722,
           "quality": "PERFECT!"
         },
         {
           "type": "slice",
-          "time": 22.016666666666058,
+          "time": 25.241666666665875,
           "quality": "PERFECT!"
         }
       ],
@@ -228,7 +234,7 @@
         },
         {
           "type": "recruit",
-          "time": 8.791666666666808,
+          "time": 10.150000000000064,
           "fruit": 1,
           "crew": [
             1,
@@ -238,7 +244,7 @@
         },
         {
           "type": "recruit",
-          "time": 17.59166666666631,
+          "time": 20.50833333333281,
           "fruit": 3,
           "crew": [
             0,
@@ -255,14 +261,16 @@
         1
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.016666666666739,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 5.708333333333407,
           "quality": "PERFECT!"
         }
       ],
@@ -284,14 +292,16 @@
         2
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 9.041666666666794,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 4.733333333333358,
           "quality": "PERFECT!"
         }
       ],
@@ -313,14 +323,16 @@
         3
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 9.200000000000118,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 4.8916666666666995,
           "quality": "PERFECT!"
         }
       ],
@@ -342,14 +354,16 @@
         4
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.150000000000064,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 5.841666666666747,
           "quality": "PERFECT!"
         }
       ],
@@ -371,14 +385,16 @@
         5
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.450000000000047,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.141666666666762,
           "quality": "PERFECT!"
         }
       ],
@@ -400,14 +416,16 @@
         6
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.000000000000073,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 5.691666666666739,
           "quality": "PERFECT!"
         }
       ],
@@ -429,14 +447,16 @@
         7
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.058333333333403,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 5.7500000000000755,
           "quality": "PERFECT!"
         }
       ],
@@ -458,14 +478,16 @@
         2
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.358333333333386,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.05000000000009,
           "quality": "PERFECT!"
         }
       ],
@@ -487,14 +509,16 @@
         3
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.358333333333386,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.05000000000009,
           "quality": "PERFECT!"
         }
       ],
@@ -516,14 +540,16 @@
         4
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.358333333333386,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.05000000000009,
           "quality": "PERFECT!"
         }
       ],
@@ -545,14 +571,16 @@
         5
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.450000000000047,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.141666666666762,
           "quality": "PERFECT!"
         }
       ],
@@ -574,14 +602,16 @@
         6
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.358333333333386,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.05000000000009,
           "quality": "PERFECT!"
         }
       ],
@@ -603,14 +633,16 @@
         7
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.358333333333386,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.05000000000009,
           "quality": "PERFECT!"
         }
       ],
@@ -632,14 +664,16 @@
         3
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 9.200000000000118,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 4.8916666666666995,
           "quality": "PERFECT!"
         }
       ],
@@ -661,14 +695,16 @@
         4
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.150000000000064,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 5.841666666666747,
           "quality": "PERFECT!"
         }
       ],
@@ -690,14 +726,16 @@
         5
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.450000000000047,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.141666666666762,
           "quality": "PERFECT!"
         }
       ],
@@ -719,14 +757,16 @@
         6
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.000000000000073,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 5.691666666666739,
           "quality": "PERFECT!"
         }
       ],
@@ -748,14 +788,16 @@
         7
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.058333333333403,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 5.7500000000000755,
           "quality": "PERFECT!"
         }
       ],
@@ -777,14 +819,16 @@
         4
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.150000000000064,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 5.841666666666747,
           "quality": "PERFECT!"
         }
       ],
@@ -806,14 +850,16 @@
         5
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.450000000000047,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.141666666666762,
           "quality": "PERFECT!"
         }
       ],
@@ -835,14 +881,16 @@
         6
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.000000000000073,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 5.691666666666739,
           "quality": "PERFECT!"
         }
       ],
@@ -864,14 +912,16 @@
         7
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.058333333333403,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 5.7500000000000755,
           "quality": "PERFECT!"
         }
       ],
@@ -893,14 +943,16 @@
         5
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.450000000000047,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.141666666666762,
           "quality": "PERFECT!"
         }
       ],
@@ -922,14 +974,16 @@
         6
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.450000000000047,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.141666666666762,
           "quality": "PERFECT!"
         }
       ],
@@ -951,14 +1005,16 @@
         7
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.450000000000047,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.141666666666762,
           "quality": "PERFECT!"
         }
       ],
@@ -980,14 +1036,16 @@
         6
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.450000000000047,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.141666666666762,
           "quality": "PERFECT!"
         }
       ],
@@ -1009,14 +1067,16 @@
         7
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.450000000000047,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.141666666666762,
           "quality": "PERFECT!"
         }
       ],
@@ -1038,14 +1098,16 @@
         7
       ],
       "phase": "served",
-      "seconds": 8.791666666666808,
+      "seconds": 10.450000000000047,
       "cuts": 1,
       "score": 350,
       "served": 1,
+      "knifeDepthTravel": 1.804289489426634,
+      "maxAttachmentError": 0,
       "contacts": [
         {
           "type": "slice",
-          "time": 4.416666666666676,
+          "time": 6.141666666666762,
           "quality": "PERFECT!"
         }
       ],
@@ -1068,6 +1130,8 @@
     "cuts": 0,
     "score": 0,
     "served": 0,
+    "knifeDepthTravel": 0,
+    "maxAttachmentError": 0,
     "contacts": [],
     "recruitments": [
       {
@@ -1080,14 +1144,16 @@
   },
   "recovery": {
     "phase": "served",
-    "seconds": 8.791666666666808,
+    "seconds": 10.150000000000064,
     "cuts": 1,
     "score": 350,
     "served": 1,
+    "knifeDepthTravel": 1.804289489426634,
+    "maxAttachmentError": 0,
     "contacts": [
       {
         "type": "slice",
-        "time": 4.416666666666676,
+        "time": 5.841666666666747,
         "quality": "PERFECT!"
       }
     ],
@@ -1109,6 +1175,8 @@
     "pairsPassed": 28,
     "pairsTotal": 28,
     "resetBlocks": true,
-    "retrainingRecovers": true
+    "retrainingRecovers": true,
+    "maxAttachmentError": 0,
+    "minimumKnifeDepthTravel": 1.804289489426634
   }
 }

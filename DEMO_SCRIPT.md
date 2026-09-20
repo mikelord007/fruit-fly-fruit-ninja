@@ -6,9 +6,9 @@ Before the demo, reload the page for the starter crew. Keep free play selected. 
 
 **10–25 seconds:** Order **Green surprise**. The order waits: zero kiwi volunteers. “Nobody knows kiwi. Let’s teach Pip and Miso.” They are selected by default. Keep Kiwi as the lesson and click **Teach 2 chefs**. Point to the feedback: 30 synapses changed and volunteers went from zero to two. “We changed their simulated connections, not their fruit labels.”
 
-**25–40 seconds:** The two chefs lift the knife. Hit **Chop** or **Space**, ideally in the green zone. “The timing earns points. The physical blade still has to touch the fruit.” Watch the halves land in the bowl. The orange fans take over for the next ingredient.
+**25–40 seconds:** Watch chefs leave their different perches and fly through the room to the knife. It waits for both grips before lifting. Hit **Chop** or **Space**, ideally in the green zone. “The timing earns points. The physical blade still has to touch the fruit.” Watch the halves land in the bowl and the next crew take over.
 
-**40–50 seconds:** Open **Peek inside a tiny brain**. Select Pip. “Synthetic smells travel through a real extracted fly circuit. These highlighted KC-to-output connections changed through training.” The inspector shows independent strengths and learned response values.
+**40–50 seconds:** Use the in-frame **Brain** selector to inspect Pip, then another chef. Drag the neural cloud to rotate it. “This is live model activity through a real extracted circuit. Each chef's learned strengths change its output. The positions are a schematic.” The detailed inspector below still shows learned synapse strengths.
 
 **50–60 seconds:** “The snack rule is our game extension; the flight controller is engineered. The connection change has a visible consequence: who volunteers. Now see how many bowls you can serve in ninety seconds.” Start **90-second rush** and hand it over.
 

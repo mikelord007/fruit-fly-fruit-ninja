@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createMemory,responses,recruit,teach,resetMemory,changedSynapses} from '../src/fruit-memory.js';
 import {createGame,order,stepGame,chop,timing,startRush,refreshCrew,bladeContact,RECIPES} from '../src/salad-game.js';
+import {KNIFE_HOME} from '../src/flight3d.js';
 const raw=JSON.parse(fs.readFileSync(new URL('../data/circuit.json',import.meta.url)));
 function play(g,max=60,perfect=true) {for(let n=0;n<max*120&&!['served','ended'].includes(g.phase);n++){stepGame(g);if(g.phase==='ready'&&(!perfect||timing(g)>.9))chop(g);}return g;}
 
@@ -53,7 +54,7 @@ test('every two-fly crew can physically lift, cut and return the knife',()=>{
   for(let a=0;a<8;a++)for(let b=a+1;b<8;b++){
     const m=createMemory(raw,{starter:false});teach(m,[a,b],3,6);
     const g=createGame(m);order(g,{name:'Pair test',fruits:[3]});play(g,15);
-    assert.equal(g.phase,'served',`crew ${a},${b}`);assert.equal(g.cutCount,1);assert.ok(g.world.y<.28);assert.ok(Number.isFinite(g.world.angle));
+    assert.equal(g.phase,'served',`crew ${a},${b}`);assert.equal(g.cutCount,1);assert.ok(Math.abs(g.world.y-KNIFE_HOME.y)<.04);assert.ok(Number.isFinite(g.world.angle));
   }
 });
 test('all recipes complete with exactly one blade-contact event per ingredient',()=>{
@@ -61,7 +62,7 @@ test('all recipes complete with exactly one blade-contact event per ingredient',
   for(const recipe of RECIPES){const g=createGame(m);order(g,recipe);play(g);assert.equal(g.phase,'served');assert.equal(g.cutCount,recipe.fruits.length);assert.equal(g.events.filter(e=>e.type==='slice').length,recipe.fruits.length);assert.equal(g.served,1);}
 });
 test('cutting does not silently train preferences',()=>{
-  const m=createMemory(raw),before=JSON.stringify(m.flies);const g=createGame(m);order(g,RECIPES[0]);play(g);assert.equal(JSON.stringify(m.flies),before);
+  const m=createMemory(raw),weights=()=>JSON.stringify(m.flies.map(f=>({weights:f.weights,lessons:f.lessons}))),before=weights();const g=createGame(m);order(g,RECIPES[0]);play(g);assert.equal(weights(),before);
 });
 test('timing earns a bonus but success still requires blade contact',()=>{
   const good=createGame(createMemory(raw)),early=createGame(createMemory(raw));
