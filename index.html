@@ -77,10 +77,10 @@
   <p id="brainCaption" class="brain-caption" title="Glows show activity from our rate model, not measured spikes. The 319 nodes and their connections come from the circuit; their positions are illustrative.">319 neurons · model activity<br>Schematic positions · drag to rotate</p>
 </aside><div id="graphicsError" hidden></div></div>
 <section class="motor-controls" aria-label="Flight controller">
-  <div class="motor-choice"><label for="motorMode">WHO IS STEERING?</label><select id="motorMode"><option value="autopilot">Autopilot</option><option value="learned">Learned action readout</option><option value="untrained">Untrained · zero thrust</option></select><p id="motorHint">Engineering reference controller.</p></div>
+  <div class="motor-choice"><label for="motorMode">WHO IS STEERING?</label><select id="motorMode" disabled><option value="autopilot">Autopilot</option><option value="learned">Learned action readout</option><option value="untrained">Untrained · zero thrust</option></select><p id="motorHint">Engineering reference controller.</p></div>
   <details class="motor-school"><summary>Train &amp; inspect flight ↗</summary><div class="motor-school-body">
     <p id="motorTrainingStatus" role="status" aria-live="polite">Loading the 3D flight lesson…</p>
-    <div class="motor-buttons"><button id="trainMotor" class="secondary">Train flight readout</button><button id="resetMotor" class="secondary">Erase flight learning</button><button id="restoreMotor" class="secondary">Restore trained flight</button><button id="restartMotorRound" class="secondary">Restart round</button></div>
+    <div class="motor-buttons"><button id="trainMotor" class="secondary" disabled>Train flight readout</button><button id="resetMotor" class="secondary" disabled>Erase flight learning</button><button id="restoreMotor" class="secondary" disabled>Restore trained flight</button><button id="restartMotorRound" class="secondary" disabled>Restart round</button></div>
     <progress id="motorProgress" max="1" value="0" aria-label="Flight training progress" hidden></progress>
     <p id="motorReadout" class="motor-readout"></p>
     <p class="motor-explanation">Flight lessons learn forces and rotation for carrying the knife in 3D. Fruit tastes are learned separately in Taste school. Perch-to-knife routes are staged navigation. <a href="./GAME_MODEL.md" target="_blank">How it works ↗</a></p>

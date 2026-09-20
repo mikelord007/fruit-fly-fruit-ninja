@@ -74,5 +74,11 @@ export async function createMotorUI(circuit,memory,{onChange,onRestart}) {
       $('motorReadout').textContent=`${memory.flies[index].name} · force ${force.toFixed(2)} / 8 · torque ${torque.toFixed(2)} / 0.9 · ${changed} flight weights${state.mode==='autopilot'?' (readout idle)':''}`;
     }
   }
+  // Do not accept a selection while the asynchronous policy load is still
+  // installing handlers; the displayed mode must match the active controller.
+  $('motorMode').value=state.mode;
+  $('motorMode').disabled=false;
+  $('restartMotorRound').disabled=false;
+  busy(false);
   return {state,live,update};
 }
