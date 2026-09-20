@@ -14,6 +14,6 @@ The readiness regression was reproduced before the fix: immediately after erasur
 
 ## Interpretation
 
-Training imitates a simple analytic teacher through fixed anatomical features. All eight chefs receive copies of a shared fitted lesson. It does not establish that biological wiring is superior, reproduce insect aerodynamics, or train the authored perch approach/return splines. Taste learning and flight readouts are independent; only flight readouts and the rush high score persist across reloads.
+Training imitates a simple analytic teacher through fixed anatomical features. All eight chefs receive copies of a shared fitted lesson. It does not establish that biological wiring is superior, reproduce insect aerodynamics, or train the authored perch approach/return splines. Smell learning and flight readouts are independent; only flight readouts and the rush high score persist across reloads.
 
 The immutable `data/circuit.json` retains SHA-256 `e00582e5d828d727f89325ff9e662176179ef2268460dbbfedb1a1cfc7d0b9d1`.

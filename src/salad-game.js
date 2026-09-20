@@ -6,7 +6,7 @@ export const MOTOR_MODES=['autopilot','learned','untrained'];
 export const RECIPES = [
   {name:'Sunshine bowl',subtitle:'The crowd pleaser',fruits:[0,1,2]},
   {name:'Berry besties',subtitle:'Double berry, extra happy',fruits:[2,0,2]},
-  {name:'Green surprise',subtitle:'Teach your crew a new taste',fruits:[3,1,3]},
+  {name:'Green surprise',subtitle:'Teach your crew a new smell',fruits:[3,1,3]},
 ];
 export const FRUIT_POSITION = {x:0,y:.56,z:0,radius:.43};
 export function createGame(memory,{motorMode='autopilot',motorSwarm=null}={}) {

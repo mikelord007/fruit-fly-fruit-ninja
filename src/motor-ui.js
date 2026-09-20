@@ -30,7 +30,7 @@ export async function createMotorUI(circuit,memory,{onChange,onRestart}) {
     for(const id of ['trainMotor','resetMotor','restoreMotor'])$(id).disabled=active||(id==='restoreMotor'&&!shipped);
     $('motorProgress').hidden=!active;
   }
-  $('motorMode').onchange=()=>{state.mode=$('motorMode').value;$('brainSource').value=state.mode==='autopilot'?'taste':'motor';change();};
+  $('motorMode').onchange=()=>{state.mode=$('motorMode').value;$('brainSource').value=state.mode==='autopilot'?'smell':'motor';change();};
   $('restartMotorRound').onclick=onRestart;
   $('resetMotor').onclick=()=>{
     state.swarm=createMotorSwarm(circuit);state.mode='learned';

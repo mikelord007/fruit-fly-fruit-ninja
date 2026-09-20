@@ -10,9 +10,9 @@ Brand assets, image-generation prompts, and search/social metadata notes: [BRAND
 
 ## Flight modes
 
-The kitchen starts with **Learned action readout** under **Who is steering?**, with **Autopilot** and **Untrained** available for comparison. Switch them live, or use **Train & inspect flight → Restart round** for a fresh comparison. A pretrained 3D lesson ships with the game; saved flight lessons are preserved on reload. **Erase flight learning** removes its motor outputs; **Train flight readout** learns them again in the browser, and **Restore trained flight** reloads the starter lesson. These controls preserve learned fruit tastes.
+The kitchen starts with **Learned action readout** under **Who is steering?**, with **Autopilot** and **Untrained** available for comparison. Switch them live, or use **Train & inspect flight → Restart round** for a fresh comparison. A pretrained 3D lesson ships with the game; saved flight lessons are preserved on reload. **Erase flight learning** removes its motor outputs; **Train flight readout** learns them again in the browser, and **Restore trained flight** reloads the starter lesson. These controls preserve learned fruit smell preferences.
 
-Choose **Flight circuit** in the Brain panel to inspect the motor features and applied force; **Taste circuit** shows smell learning. Learning steers each fly from its shelf to the knife and back, and controls the knife's XYZ forces and rotation. Flies follow spatial waypoints through physical feedback rather than timed animation. Try **Gust of wind** under **Train & inspect flight** to watch them recover. See [GAME_MODEL.md](GAME_MODEL.md) for the distinction and measured results.
+Choose **Flight circuit** in the Brain panel to inspect the motor features and applied force; **Smell circuit** shows smell learning. Learning steers each fly from its shelf to the knife and back, and controls the knife's XYZ forces and rotation. Flies follow spatial waypoints through physical feedback rather than timed animation. Try **Gust of wind** under **Train & inspect flight** to watch them recover. See [GAME_MODEL.md](GAME_MODEL.md) for the distinction and measured results.
 
 ## Play
 
@@ -24,15 +24,15 @@ npm start
 
 Open **http://127.0.0.1:5184**. The server listens only on your computer. Keep its terminal running.
 
-Use **Fullscreen** in the kitchen's top-right corner to expand the scene, Brain panel, and chop controls. **Escape** or **Exit fullscreen** returns to the page; **Menu & training** takes you back to orders or taste school. Your current order continues across view changes. Browsers without native fullscreen use a viewport-filling view.
+Use **Fullscreen** in the kitchen's top-right corner to expand the scene, Brain panel, and chop controls. **Escape** or **Exit fullscreen** returns to the page; **Menu & training** takes you back to orders or smell school. Your current order continues across view changes. Browsers without native fullscreen use a viewport-filling view.
 
 1. Order **Sunshine bowl**. Apple fans fly out and lift the knife.
 2. Hit **Chop** or **Space** when the timing marker reaches the green zone. The moving blade must physically touch the fruit.
 3. Repeat for orange and strawberry; each ingredient recruits its own crew. Finish the bowl for a bonus.
-4. Order **Green surprise**. Nobody knows kiwi yet. In **Taste school**, select two chefs and teach kiwi. Their connections strengthen, they volunteer, and the waiting order continues.
+4. Order **Green surprise**. Nobody knows kiwi yet. In **Smell school**, select two chefs and teach kiwi. Their connections strengthen, they volunteer, and the waiting order continues.
 5. Try a **90-second rush**, make a custom mix, or open the brain inspector and clear learning to see volunteering disappear.
 
-Drag the scene to orbit, scroll to zoom, and click a fly to inspect its brain. Chef cards select flies for training. The Brain inset also has a fly selector, a rotatable neural cloud, and a **Sniff** button that activates the selected circuit without training it. Carriers must all reach their grips before the knife lifts, and they stay attached without following lag. Sound is optional. Learned tastes last until page reload; the best rush score stays in local storage. Tab hiding pauses the simulation. Canceling an order returns to the menu while keeping earned points and the remaining rush time.
+Drag the scene to orbit, scroll to zoom, and click a fly to inspect its brain. Chef cards select flies for training. The Brain inset also has a fly selector, a rotatable neural cloud, and a **Sniff** button that activates the selected circuit without training it. Carriers must all reach their grips before the knife lifts, and they stay attached without following lag. Sound is optional. Learned smell preferences last until page reload; the best rush score stays in local storage. Tab hiding pauses the simulation. Canceling an order returns to the menu while keeping earned points and the remaining rush time.
 
 ## Learning, honestly
 

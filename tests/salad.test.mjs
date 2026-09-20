@@ -12,7 +12,7 @@ test('fruit circuit uses 192 KC edges and does not mutate anatomical counts',()=
   assert.equal(m.kcIds.length,192);assert.equal(JSON.stringify(raw),before);
   assert.deepEqual(m.activity.map(a=>a.filter(v=>v>0).length),[15,15,15,15]);
 });
-test('starter tastes are learned and recruit distinct crews',()=>{
+test('starter smell preferences are learned and recruit distinct crews',()=>{
   const m=createMemory(raw);assert.deepEqual([0,1,2,3].map(f=>recruit(m,f)),[[0,3,6],[1,4,7],[2,5],[]]);
   assert.equal(m.history.length,8);assert.ok(m.history.every(h=>h.source==='starter'&&h.repetitions===6));
   resetMemory(m);for(let f=0;f<4;f++)assert.deepEqual(recruit(m,f),[]);

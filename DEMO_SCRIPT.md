@@ -1,8 +1,8 @@
 # A 60-second Fruit Fly Fruit Ninja demo
 
-Before the demo, reload the page for the starter crew. Keep free play and Autopilot selected for the taste demonstration. Scroll so the kitchen and Taste school are easy to reach. Optional: enable sound.
+Before the demo, reload the page for the starter crew. Keep free play and Autopilot selected for the smell demonstration. Scroll so the kitchen and Smell school are easy to reach. Optional: enable sound.
 
-**0–10 seconds:** “Welcome to the tiniest salad bar. These chefs have learned different tastes.” Point at the chef cards: apple, orange and strawberry fans. “Their tastes decide who takes the knife.”
+**0–10 seconds:** “Welcome to the tiniest salad bar. These chefs have learned different smell preferences.” Point at the chef cards: apple, orange and strawberry fans. “Their smell preferences decide who takes the knife.”
 
 **10–25 seconds:** Order **Green surprise**. The order waits: zero kiwi volunteers. “Nobody knows kiwi. Let’s teach Pip and Miso.” They are selected by default. Keep Kiwi as the lesson and click **Teach 2 chefs**. Point to the feedback: 30 synapses changed and volunteers went from zero to two. “We changed their simulated connections, not their fruit labels.”
 
@@ -14,6 +14,6 @@ Before the demo, reload the page for the starter crew. Keep free play and Autopi
 
 Optional causal demonstration: **Clear learning + round** removes every learned preference. Order any bowl: no crew volunteers. Teach two chefs its first ingredient; the recipe resumes. **Restore starter crew** recovers the initial demo.
 
-Optional flight demonstration: open **Train & inspect flight**, click **Restore trained flight**, then **Restart round**. Order Sunshine bowl. Select **Flight circuit** in the Brain inset: “This readout learned six motor outputs from a teacher through fixed fly-circuit features.” Once the knife hovers, click **Erase flight learning**: thrust drops to zero and Chop disables. Click **Train flight readout**: a worker fits the lesson again, and the same crew recovers the knife. “Their tastes stayed the same; we erased and relearned how to control the load.” **Untrained** offers the zero-output comparison without erasing the stored lesson. Perch approach paths remain staged in all three modes.
+Optional flight demonstration: open **Train & inspect flight**, click **Restore trained flight**, then **Restart round**. Order Sunshine bowl. Select **Flight circuit** in the Brain inset: “This readout learned six motor outputs from a teacher through fixed fly-circuit features.” Once the knife hovers, click **Erase flight learning**: thrust drops to zero and Chop disables. Click **Train flight readout**: a worker fits the lesson again, and the same crew recovers the knife. “Their smell preferences stayed the same; we erased and relearned how to control the load.” **Untrained** offers the zero-output comparison without erasing the stored lesson. Perch approach paths remain staged in all three modes.
 
 Do not describe the game as proven human brain training, biological knife flight, or a physiological appetitive PPL1 model. Full assumptions: `GAME_MODEL.md`. Original motor-lab pitch: `LAB_DEMO.md`.
